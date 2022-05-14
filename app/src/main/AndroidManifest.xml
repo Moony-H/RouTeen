@@ -8,6 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.RouTeen" />
+        android:theme="@style/Theme.RouTeen" >
+
+        <receiver android:name=".receiver.AlarmReceiver"
+            android:exported="true"
+            android:enabled="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
 
 </manifest>
