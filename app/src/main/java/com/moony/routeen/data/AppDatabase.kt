@@ -2,10 +2,12 @@ package com.moony.routeen.data
 
 import android.content.Context
 import androidx.room.*
+import com.moony.routeen.utils.RoomConverter
 
-@Database(entities = [BusAlarmTime::class],version = 0)
+@Database(entities = [BusAlarmInfo::class],version = 0)
+@TypeConverters(RoomConverter::class)
 abstract class AppDatabase:RoomDatabase() {
-    abstract fun busAlarmTimeDao():BusAlarmTimeDao
+    abstract fun busAlarmTimeDao():BusAlarmInfoDao
     companion object{
         @Volatile private var instance:AppDatabase?=null
 

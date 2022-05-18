@@ -3,6 +3,7 @@
     package="com.moony.routeen">
 
     <application
+        android:name=".RouTeenApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
