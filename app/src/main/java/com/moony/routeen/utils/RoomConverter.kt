@@ -13,7 +13,7 @@ class RoomConverter {
     }
     @TypeConverter
     fun dayToString(value:Day):String{
-        return "${value.day} ${value.num}"
+        return "${value.dayName} ${value.num}"
     }
 
     @TypeConverter

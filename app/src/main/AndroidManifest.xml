@@ -19,7 +19,7 @@
                 <action android:name="android.intent.action.DATE_CHANGED"/>
             </intent-filter>
         </receiver>
-        <activity android:name=".ui.MainActivity"
+        <activity android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

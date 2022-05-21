@@ -1,6 +1,6 @@
 package com.moony.routeen.data
 
-enum class Day(val day:String, val num:Int) {
+enum class Day(val dayName:String, val num:Int) {
     Mon("Mon",0),
     Tue("Tue",1),
     Wed("Wed",2),

@@ -1,4 +1,4 @@
-package moony
+package com.moony.routeen.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,6 +9,5 @@ class TimeTextView: ConstraintLayout {
 
     }
     constructor(context: Context,attrs:AttributeSet):super(context,attrs){
-
     }
 }
