@@ -6,17 +6,19 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.moony.routeen.R
+import com.moony.routeen.databinding.ActivityMainBinding
+import com.moony.routeen.utils.Converter
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.String
 
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity(){
 
+    private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val a=View(baseContext)
-        Log.d("test","${Color.parseColor("#AAFFFF")}")
+        binding= ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
     }
 }

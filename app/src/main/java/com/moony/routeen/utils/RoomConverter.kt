@@ -26,7 +26,4 @@ class RoomConverter {
         return date.time
     }
 
-
-
-
 }
