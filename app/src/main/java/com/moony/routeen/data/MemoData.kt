@@ -6,7 +6,6 @@ import com.moony.routeen.ui.view.memo.Memo
 
 @Entity
 data class MemoData(
-    var type:Int,
     var memo:Memo
 ){
     @PrimaryKey(autoGenerate = true) var id:Int=0

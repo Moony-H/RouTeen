@@ -1,7 +1,9 @@
 package com.moony.routeen.data
 
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class BusAlarmInfoRepository @Inject constructor(private val busAlarmTimeDao: BusAlarmInfoDao) {
     suspend fun insertBusAlarmInfo(info: BusAlarmInfo){
         busAlarmTimeDao.insertBusAlarmInfo(info)

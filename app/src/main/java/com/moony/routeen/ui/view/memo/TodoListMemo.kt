@@ -10,4 +10,7 @@ class TodoListMemo:Memo {
     constructor(context: Context,attrs:AttributeSet):super(context, attrs){
 
     }
+    fun init(){
+        super.text="ToDoListMemo"
+    }
 }
