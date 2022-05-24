@@ -2,8 +2,8 @@ package com.moony.routeen.di
 
 import android.content.Context
 import com.moony.routeen.data.AppDatabase
-import com.moony.routeen.data.BusAlarmInfoDao
-import com.moony.routeen.data.MemoDataDao
+import com.moony.routeen.data.entity.BusAlarmInfoDao
+import com.moony.routeen.data.entity.MemoDataDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,12 +20,12 @@ class DatabaseModule {
         return AppDatabase.getInstance(context)
     }
     @Provides
-    fun provideBusAlarmInfoDao(appDatabase: AppDatabase):BusAlarmInfoDao{
+    fun provideBusAlarmInfoDao(appDatabase: AppDatabase): BusAlarmInfoDao {
         return appDatabase.busAlarmInfoDao()
     }
 
     @Provides
-    fun provideMemoDataDao(appDatabase: AppDatabase):MemoDataDao{
+    fun provideMemoDataDao(appDatabase: AppDatabase): MemoDataDao {
         return appDatabase.memoDataDao()
     }
 }

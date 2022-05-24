@@ -1,9 +1,10 @@
-package com.moony.routeen.data
+package com.moony.routeen.data.entity
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.moony.routeen.data.Day
 
 @Dao
 interface BusAlarmInfoDao {

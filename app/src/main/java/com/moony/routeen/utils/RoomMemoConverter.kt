@@ -4,7 +4,7 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.moony.routeen.data.MemoType
-import com.moony.routeen.ui.view.memo.Memo
+import com.moony.routeen.data.structure.Memo
 import java.util.*
 @ProvidedTypeConverter
 class RoomMemoConverter(private val gson: Gson) {
@@ -15,6 +15,7 @@ class RoomMemoConverter(private val gson: Gson) {
 
     @TypeConverter
     fun jsonToMemo(json:String): Memo {
+
         return gson.fromJson(json,Memo::class.java)
     }
 }

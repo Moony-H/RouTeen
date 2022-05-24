@@ -3,14 +3,18 @@ package com.moony.routeen.data
 import android.content.Context
 import androidx.room.*
 import com.google.gson.Gson
+import com.moony.routeen.data.entity.BusAlarmInfo
+import com.moony.routeen.data.entity.BusAlarmInfoDao
+import com.moony.routeen.data.entity.MemoData
+import com.moony.routeen.data.entity.MemoDataDao
 import com.moony.routeen.utils.RoomConverter
 import com.moony.routeen.utils.RoomMemoConverter
 
-@Database(entities = [BusAlarmInfo::class,MemoData::class],version = 0)
+@Database(entities = [BusAlarmInfo::class, MemoData::class],version = 1)
 @TypeConverters(value = [RoomConverter::class,RoomMemoConverter::class])
 abstract class AppDatabase:RoomDatabase() {
-    abstract fun busAlarmInfoDao():BusAlarmInfoDao
-    abstract fun memoDataDao():MemoDataDao
+    abstract fun busAlarmInfoDao(): BusAlarmInfoDao
+    abstract fun memoDataDao(): MemoDataDao
     companion object{
         @Volatile private var instance:AppDatabase?=null
 
@@ -32,6 +36,7 @@ abstract class AppDatabase:RoomDatabase() {
                 AppDatabase::class.java,
                 "app-database"
             ).addTypeConverter(RoomMemoConverter(Gson()))
+                .fallbackToDestructiveMigration()
                 .build()
 
 

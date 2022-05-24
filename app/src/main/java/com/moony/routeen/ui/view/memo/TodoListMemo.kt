@@ -3,7 +3,7 @@ package com.moony.routeen.ui.view.memo
 import android.content.Context
 import android.util.AttributeSet
 
-class TodoListMemo:Memo {
+class TodoListMemoView:MemoView {
     constructor(context: Context):super(context){
 
     }

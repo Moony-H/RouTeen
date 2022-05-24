@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 
-open class Memo:ConstraintLayout {
+open class MemoView: ConstraintLayout {
     var text="Memo"
     constructor(context: Context):super(context){
 

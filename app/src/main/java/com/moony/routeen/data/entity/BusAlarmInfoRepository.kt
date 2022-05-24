@@ -1,5 +1,6 @@
-package com.moony.routeen.data
+package com.moony.routeen.data.entity
 
+import com.moony.routeen.data.Day
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -9,7 +10,7 @@ class BusAlarmInfoRepository @Inject constructor(private val busAlarmTimeDao: Bu
         busAlarmTimeDao.insertBusAlarmInfo(info)
     }
 
-    suspend fun deleteBusAlarmInfo(info:BusAlarmInfo){
+    suspend fun deleteBusAlarmInfo(info: BusAlarmInfo){
         busAlarmTimeDao.deleteBusAlarmInfo(info)
     }
 
