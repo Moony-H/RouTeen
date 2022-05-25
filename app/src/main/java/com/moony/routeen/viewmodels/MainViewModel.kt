@@ -23,7 +23,7 @@ class MainViewModel @Inject constructor(private val repository: MemoDataReposito
         get()=_allMemos
     fun insertMemo(memo: Memo){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertMemoData(MemoData(memo,MemoType.ToDoListMemo))
+            repository.insertMemoData(MemoData(memo,MemoType.TodoListMemo))
         }
     }
 
@@ -33,9 +33,9 @@ class MainViewModel @Inject constructor(private val repository: MemoDataReposito
             val response= mutableListOf<Memo>()
 
             data.forEach {
-                if(it.memoType==MemoType.ToDoListMemo){
+                if(it.memoType==MemoType.TodoListMemo){
                     val temp= it.memo as TodoListMemo
-                    Log.d("test", temp.test)
+                    Log.d("test", "func call ${temp.getType()}")
                     response.add(it.memo as TodoListMemo)
 
                 }
