@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.moony.routeen.data.MemoType
 import com.moony.routeen.data.entity.MemoData
 import com.moony.routeen.data.entity.MemoDataRepository
-import com.moony.routeen.data.structure.Memo
-import com.moony.routeen.data.structure.TodoListMemo
+import com.moony.routeen.data.structure.memo.Memo
+import com.moony.routeen.data.structure.memo.TodoListMemo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ class MainViewModel @Inject constructor(private val repository: MemoDataReposito
             data.forEach {
                 if(it.memoType==MemoType.TodoListMemo){
                     val temp= it.memo as TodoListMemo
-                    Log.d("test", "func call ${temp.getType()}")
+                    Log.d("test", "func call ${temp.memoType}")
                     response.add(it.memo as TodoListMemo)
 
                 }

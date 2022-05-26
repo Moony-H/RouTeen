@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"
@@ -31,6 +33,13 @@
         app:layout_constraintRight_toLeftOf="@id/load"
         android:text="다 지우기"
         />
+    <Button
+        android:id="@+id/test_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/testlist"
+        />
     <TextView
         android:id="@+id/main_text"
         android:layout_width="wrap_content"
@@ -40,8 +49,12 @@
         app:layout_constraintRight_toRightOf="parent"
         android:text="초기 값"
         />
-    <androidx.fragment.app.FragmentContainerView
+    <com.moony.routeen.ui.view.memo.TodoListMemoView
+        android:id="@+id/testlist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="200dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

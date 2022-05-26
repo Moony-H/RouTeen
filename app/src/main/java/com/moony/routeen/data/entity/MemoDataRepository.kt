@@ -1,6 +1,5 @@
 package com.moony.routeen.data.entity
 
-import com.moony.routeen.data.structure.Memo
 import javax.inject.Inject
 import javax.inject.Singleton
 
