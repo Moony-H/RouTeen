@@ -2,30 +2,42 @@ package com.moony.routeen.ui.view.memo
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.moony.routeen.data.structure.basic.Pair
 import com.moony.routeen.data.structure.memo.TodoListMemo
+import com.moony.routeen.databinding.SourceTodoListMemoBinding
 import com.moony.routeen.ui.view.other.CheckTextView
 
 class TodoListMemoView:MemoView {
-    var todoListMemo=TodoListMemo()
-    constructor(context: Context):super(context){
+
+    var todoListMemo=TodoListMemo(1)
+    private lateinit var binding:SourceTodoListMemoBinding
+    private lateinit var adapter: TodoListMemoViewAdapter
+    constructor(context: Context):super(context)
+    constructor(context: Context,attrs:AttributeSet):super(context, attrs)
+    constructor(context: Context,attrs:AttributeSet,todoListMemo: TodoListMemo):super(context, attrs){
+        this.todoListMemo=todoListMemo
 
     }
-    constructor(context: Context,attrs:AttributeSet):super(context, attrs){
 
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        initView()
     }
-
-    fun addEmptyTodoListComponent(){
-        todoListMemo.addTodoList(Pair(false , ""))
-        val checkTextView=CheckTextView(this.context)
-        val layoutParams=LayoutParams(LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
-        layoutParams.leftToLeft=LayoutParams.PARENT_ID
-        layoutParams.rightToRight=LayoutParams.PARENT_ID
-        checkTextView.layoutParams=layoutParams
-        this.addView(checkTextView)
+    private fun initView(){
+        binding=
+            SourceTodoListMemoBinding.inflate(
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
+                this
+            )
+        SourceTodoListMemoBinding.bind(this)
+        adapter=TodoListMemoViewAdapter(todoListMemo)
+        binding.sourceTodoListRecyclerView.layoutManager=LinearLayoutManager(context)
+        binding.sourceTodoListRecyclerView.adapter=adapter
+        binding.sourceTodoListTitleEditText.setText(todoListMemo.title)
     }
-
-
 
 }

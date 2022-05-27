@@ -24,7 +24,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
         binding.load.setOnClickListener(this)
         binding.save.setOnClickListener(this)
         binding.deleteAll.setOnClickListener(this)
-        binding.testList.setOnClickListener(this)
+
         viewModel.allMemos.observe(this){
 
 
@@ -44,9 +44,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
             binding.deleteAll->{
                 viewModel.deleteAllMemoData()
             }
-            binding.testList->{
-                binding.testlist.addEmptyTodoListComponent()
-            }
+
         }
     }
 }

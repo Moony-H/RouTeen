@@ -33,13 +33,6 @@
         app:layout_constraintRight_toLeftOf="@id/load"
         android:text="다 지우기"
         />
-    <Button
-        android:id="@+id/test_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/testlist"
-        />
     <TextView
         android:id="@+id/main_text"
         android:layout_width="wrap_content"
@@ -50,11 +43,12 @@
         android:text="초기 값"
         />
     <com.moony.routeen.ui.view.memo.TodoListMemoView
-        android:id="@+id/testlist"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
