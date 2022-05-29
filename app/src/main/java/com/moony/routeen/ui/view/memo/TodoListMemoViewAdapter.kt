@@ -10,6 +10,7 @@ import com.moony.routeen.data.structure.basic.Pair
 import com.moony.routeen.data.structure.memo.TodoListMemo
 import com.moony.routeen.databinding.SourceRecyclerviewAddButtonBinding
 import java.lang.IllegalArgumentException
+import java.util.*
 
 class TodoListMemoViewAdapter(private val list: TodoListMemo): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -20,14 +21,12 @@ class TodoListMemoViewAdapter(private val list: TodoListMemo): RecyclerView.Adap
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
             R.layout.source_custom_check_text_item->{
-                Log.d("test","create check")
                 CheckViewHolder(CheckTextView(parent.context))
             }
             R.layout.source_recyclerview_add_button->{
                 AddViewHolder(SourceRecyclerviewAddButtonBinding.inflate(LayoutInflater.from(parent.context),parent,false)){
                     list.addTodoList(Pair(false,""))
                     this.notifyItemInserted(list.getSize()-1)
-                    Log.d("test","create add")
                 }
             }
             else-> throw IllegalArgumentException("TodoListMemoViewAdapter unknown view type")
@@ -50,6 +49,11 @@ class TodoListMemoViewAdapter(private val list: TodoListMemo): RecyclerView.Adap
 
     override fun getItemCount(): Int {
         return list.getSize()+1
+    }
+
+    fun swapData(fromPos: Int, toPos: Int) {
+        Collections.swap(list.todoList, fromPos, toPos)
+        notifyItemMoved(fromPos, toPos)
     }
 
     class CheckViewHolder(private val view:CheckTextView): RecyclerView.ViewHolder(view) {
