@@ -6,37 +6,36 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moony.routeen.data.MemoType
-import com.moony.routeen.data.entity.MemoData
-import com.moony.routeen.data.entity.MemoDataRepository
-import com.moony.routeen.data.structure.memo.Memo
-import com.moony.routeen.data.structure.memo.TodoListMemo
+import com.moony.routeen.data.entity.Memo
+import com.moony.routeen.data.entity.MemoRepository
+import com.moony.routeen.data.structure.memo.TodoListMemoData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: MemoDataRepository):ViewModel() {
+class MainViewModel @Inject constructor(private val repository: MemoRepository):ViewModel() {
 
-    private val _allMemos=MutableLiveData<List<Memo>>()
-    val allMemos:LiveData<List<Memo>>
+    private val _allMemos=MutableLiveData<List<com.moony.routeen.data.structure.memo.MemoData>>()
+    val allMemos:LiveData<List<com.moony.routeen.data.structure.memo.MemoData>>
         get()=_allMemos
-    fun insertMemo(memo: Memo){
+    fun insertMemo(memoData: com.moony.routeen.data.structure.memo.MemoData){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertMemoData(MemoData(memo,MemoType.TodoListMemo))
+            repository.insertMemo(Memo(memoData,MemoType.TodoListMemo))
         }
     }
 
     fun getAllMemo(){
         viewModelScope.launch(Dispatchers.IO){
-            val data=repository.getAllMemoData()
-            val response= mutableListOf<Memo>()
+            val data=repository.getAllMemo()
+            val response= mutableListOf<com.moony.routeen.data.structure.memo.MemoData>()
 
             data.forEach {
                 if(it.memoType==MemoType.TodoListMemo){
-                    val temp= it.memo as TodoListMemo
+                    val temp= it.memoData as TodoListMemoData
                     Log.d("test", "func call ${temp.memoType}")
-                    response.add(it.memo as TodoListMemo)
+                    response.add(it.memoData as TodoListMemoData)
 
                 }
 
@@ -48,7 +47,7 @@ class MainViewModel @Inject constructor(private val repository: MemoDataReposito
 
     fun deleteAllMemoData(){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllMemoData()
+            repository.deleteAllMemo()
         }
     }
 

@@ -2,16 +2,19 @@ package com.moony.routeen.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.moony.routeen.R
 import com.moony.routeen.ui.view.other.CheckTextView
 import com.moony.routeen.data.structure.basic.Pair
-import com.moony.routeen.data.structure.memo.TodoListMemo
+import com.moony.routeen.data.structure.memo.CheckTextState
+import com.moony.routeen.data.structure.memo.TodoListMemoData
+import com.moony.routeen.databinding.SourceItemTodoListBinding
 import com.moony.routeen.databinding.SourceRecyclerviewAddButtonBinding
 import java.lang.IllegalArgumentException
 import java.util.*
 
-class TodoListMemoViewAdapter(private val list: TodoListMemo): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TodoListMemoViewAdapter(private val list: TodoListMemoData): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun getItemViewType(position: Int): Int {
@@ -20,11 +23,17 @@ class TodoListMemoViewAdapter(private val list: TodoListMemo): RecyclerView.Adap
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
             R.layout.source_custom_check_text_item->{
-                CheckViewHolder(CheckTextView(parent.context))
+                val binding=DataBindingUtil.inflate<SourceItemTodoListBinding>(
+                    LayoutInflater.from(parent.context),
+                    R.layout.source_item_todo_list,
+                    parent,
+                    false
+                )
+                CheckViewHolder(binding)
             }
             R.layout.source_recyclerview_add_button->{
                 AddViewHolder(SourceRecyclerviewAddButtonBinding.inflate(LayoutInflater.from(parent.context),parent,false)){
-                    list.addTodoList(Pair(false,""))
+                    list.addTodoList(CheckTextState(false,""))
                     this.notifyItemInserted(list.getSize()-1)
                 }
             }
@@ -51,14 +60,15 @@ class TodoListMemoViewAdapter(private val list: TodoListMemo): RecyclerView.Adap
     }
 
     fun swapData(fromPos: Int, toPos: Int) {
+        if(fromPos<0 || toPos>=list.getSize())
+            return
         Collections.swap(list.todoList, fromPos, toPos)
         notifyItemMoved(fromPos, toPos)
     }
 
-    class CheckViewHolder(private val view:CheckTextView): RecyclerView.ViewHolder(view) {
-        fun bind(item:Pair<Boolean,String>){
-            view.setText(item.second)
-            view.setCheckState(item.first)
+    class CheckViewHolder(private val binding:SourceItemTodoListBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(item:CheckTextState){
+            binding.checkTextState=item
         }
     }
     class AddViewHolder(private val binding:SourceRecyclerviewAddButtonBinding,private val onClick:()->Unit):RecyclerView.ViewHolder(binding.root){

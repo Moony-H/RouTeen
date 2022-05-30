@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.moony.routeen.data.structure.memo.TodoListMemo
+import com.moony.routeen.data.structure.memo.TodoListMemoData
 import com.moony.routeen.databinding.ActivityMainBinding
 import com.moony.routeen.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +38,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
                 viewModel.getAllMemo()
             }
             binding.save->{
-                val memo= TodoListMemo()
+                val memo= TodoListMemoData()
                 viewModel.insertMemo(memo)
             }
             binding.deleteAll->{

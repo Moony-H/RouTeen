@@ -3,7 +3,7 @@ package com.moony.routeen.di
 import android.content.Context
 import com.moony.routeen.data.AppDatabase
 import com.moony.routeen.data.entity.BusAlarmInfoDao
-import com.moony.routeen.data.entity.MemoDataDao
+import com.moony.routeen.data.entity.MemoDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +25,7 @@ class DatabaseModule {
     }
 
     @Provides
-    fun provideMemoDataDao(appDatabase: AppDatabase): MemoDataDao {
+    fun provideMemoDataDao(appDatabase: AppDatabase): MemoDao {
         return appDatabase.memoDataDao()
     }
 }

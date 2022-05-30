@@ -8,68 +8,88 @@ import android.view.LayoutInflater
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.DataBindingUtil
+import com.moony.routeen.R
 import com.moony.routeen.data.structure.basic.Pair
+import com.moony.routeen.data.structure.memo.CheckTextState
 import com.moony.routeen.databinding.SourceCustomCheckTextItemBinding
 
 class CheckTextView:ConstraintLayout {
     private lateinit var binding: SourceCustomCheckTextItemBinding
     private lateinit var checkBox:CheckBox
     private lateinit var editText:EditText
-    private val viewState=Pair(false,"")
+    var checked=false
+    set(value){
+        checkBox.isChecked=value
+        field = value
+    }
+
+    var text=""
+    set(value){
+        editText.setText(value)
+        field=value
+    }
+
+    private val viewState=CheckTextState(false,"")
     constructor(context: Context) : super(context) {
         initView()
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+
+
         initView()
+        val typedArray=context.obtainStyledAttributes(attrs, R.styleable.CheckTextView)
+        checked=typedArray.getBoolean(R.styleable.CheckTextView_checked,false)
+        typedArray.getString(R.styleable.CheckTextView_text)?.let { text=it }
+        typedArray.recycle()
     }
 
     private fun initView() {
         binding =
             SourceCustomCheckTextItemBinding.inflate(
-                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
+                LayoutInflater.from(context),
                 this,
+                true
             )
-        SourceCustomCheckTextItemBinding.bind(this)
+        //SourceCustomCheckTextItemBinding.bind(this)
         val layoutParams=LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT)
         this.layoutParams=layoutParams
         checkBox=binding.sourceCustomCheckbox
         editText=binding.sourceCustomEdit
-        viewState.first=checkBox.isChecked
-        viewState.second=editText.text.toString()
+        viewState.checked=checkBox.isChecked
+        viewState.text=editText.text.toString()
         editText.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(cs: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                viewState.second=cs.toString()
+                viewState.text=cs.toString()
             }
             override fun afterTextChanged(p0: Editable?) {}
 
         })
 
         checkBox.setOnClickListener {
-            viewState.first=checkBox.isChecked
+            viewState.checked=checkBox.isChecked
         }
     }
 
-    fun getCheckState():Boolean{
-        return checkBox.isChecked
-    }
 
-    fun setCheckState(isChecked:Boolean){
-        checkBox.isChecked=isChecked
-        viewState.first=isChecked
-    }
+//
+    //fun setChecked(isChecked:Boolean){
+    //    checkBox.isChecked=isChecked
+    //    viewState.checked=isChecked
+    //}
+//
+    //fun setText(text:String){
+    //    editText.setText(text)
+    //    viewState.text=text
+    //}
+//
+    //fun getText():String{
+    //    return viewState.text
+    //}
 
-    fun setText(text:String){
-        editText.setText(text)
-        viewState.second=text
-    }
-
-    fun getText():String{
-        return viewState.second
-    }
-
-    fun getCheckTextViewState():Pair<Boolean,String>{
+    fun getCheckTextViewState(): CheckTextState {
         return viewState
     }
 }

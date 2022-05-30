@@ -17,9 +17,7 @@ class RecyclerviewSwipeHelper(private val recyclerViewAdapter : TodoListMemoView
 
     // 이동 방향 결정하기
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-        // 드래그 방향 : 위, 아래 인식
-        // 스와이프 방향 : 왼쪽, 오른쪽 인식
-        // 설정 안 하고 싶으면 0
+
         return makeMovementFlags(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
     }
 
@@ -107,8 +105,7 @@ class RecyclerviewSwipeHelper(private val recyclerViewAdapter : TodoListMemoView
     }
 
     // swipe_view 반환 -> swipe_view만 이동할 수 있게 해줌
-    private fun getView(viewHolder: RecyclerView.ViewHolder) : View = viewHolder.itemView.findViewById(
-        R.id.swipe_view)
+    private fun getView(viewHolder: RecyclerView.ViewHolder) : View = viewHolder.itemView
 
     // swipe_view 를 swipe 했을 때 <삭제> 화면이 보이도록 고정
     private fun clampViewPositionHorizontal(

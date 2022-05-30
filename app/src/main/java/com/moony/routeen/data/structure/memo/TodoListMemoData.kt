@@ -1,20 +1,19 @@
 package com.moony.routeen.data.structure.memo
 
 import com.moony.routeen.data.MemoType
-import com.moony.routeen.data.structure.memo.Memo
 import com.moony.routeen.data.structure.basic.Pair
 
-class TodoListMemo(): Memo() {
+class TodoListMemoData(): MemoData() {
 
 
     //밖에서 함부로 못건드리게
-    private val _todoList= mutableListOf<Pair<Boolean,String>>()
-    val todoList:List<Pair<Boolean,String>>
+    private val _todoList= mutableListOf<CheckTextState>()
+    val todoList:List<CheckTextState>
         get()=_todoList
 
     constructor(defaultSize:Int) : this() {
         for(i in 0 until defaultSize){
-            _todoList.add(Pair(false,""))
+            _todoList.add(CheckTextState(false,""))
         }
     }
 
@@ -23,11 +22,11 @@ class TodoListMemo(): Memo() {
 
     }
 
-    fun addTodoList(pair:Pair<Boolean,String>){
+    fun addTodoList(pair:CheckTextState){
         _todoList.add(pair)
     }
 
-    fun popTodoList():Pair<Boolean,String>{
+    fun popTodoList():CheckTextState{
         return _todoList.removeLast()
     }
 
@@ -35,7 +34,7 @@ class TodoListMemo(): Memo() {
         _todoList.removeAt(index)
     }
 
-    fun setPairAt(index: Int,pair:Pair<Boolean,String>){
+    fun setPairAt(index: Int,pair:CheckTextState){
         _todoList[index]=pair
     }
 

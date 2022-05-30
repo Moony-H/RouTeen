@@ -5,27 +5,27 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.moony.routeen.data.MemoType
-import com.moony.routeen.data.structure.memo.Memo
-import com.moony.routeen.data.structure.memo.TodoListMemo
+import com.moony.routeen.data.structure.memo.MemoData
+import com.moony.routeen.data.structure.memo.TodoListMemoData
 
 @ProvidedTypeConverter
 class RoomMemoConverter(private val gson: Gson) {
     @TypeConverter
-    fun memoToJson(memo: Memo): String{
+    fun memoToJson(memoData: MemoData): String{
         //if(memo.memoType==MemoType.TodoListMemo){
         //    Log.d("DataBase","save TodoListMemo")
         //    return gson.toJson(memo as TodoListMemo)
         //}
 
-        return gson.toJson(memo)
+        return gson.toJson(memoData)
     }
 
     @TypeConverter
-    fun jsonToMemo(json:String): Memo {
-        val temp=gson.fromJson(json, Memo::class.java)
+    fun jsonToMemo(json:String): MemoData {
+        val temp=gson.fromJson(json, MemoData::class.java)
         Log.d("test",json)
         if(temp.memoType==MemoType.TodoListMemo){
-            return gson.fromJson(json, TodoListMemo::class.java)
+            return gson.fromJson(json, TodoListMemoData::class.java)
         }
 
         return temp
