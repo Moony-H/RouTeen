@@ -1,6 +1,5 @@
-package com.moony.routeen.ui.view.memo
+package com.moony.routeen.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

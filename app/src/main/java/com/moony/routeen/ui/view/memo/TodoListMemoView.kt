@@ -3,13 +3,10 @@ package com.moony.routeen.ui.view.memo
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.moony.routeen.data.structure.basic.Pair
 import com.moony.routeen.data.structure.memo.TodoListMemo
 import com.moony.routeen.databinding.SourceTodoListMemoBinding
-import com.moony.routeen.ui.view.other.CheckTextView
+import com.moony.routeen.ui.adapter.TodoListMemoViewAdapter
 
 class TodoListMemoView:MemoView {
 
@@ -34,7 +31,7 @@ class TodoListMemoView:MemoView {
                 this
             )
         SourceTodoListMemoBinding.bind(this)
-        adapter=TodoListMemoViewAdapter(todoListMemo)
+        adapter= TodoListMemoViewAdapter(todoListMemo)
         binding.sourceTodoListRecyclerView.layoutManager=LinearLayoutManager(context)
         binding.sourceTodoListRecyclerView.adapter=adapter
         binding.sourceTodoListTitleEditText.setText(todoListMemo.title)

@@ -1,4 +1,4 @@
-package com.moony.routeen.ui.view.memo
+package com.moony.routeen.ui.adapter
 
 import android.graphics.Canvas
 import android.view.View

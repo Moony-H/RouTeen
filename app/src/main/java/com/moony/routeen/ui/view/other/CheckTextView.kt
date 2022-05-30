@@ -45,6 +45,10 @@ class CheckTextView:ConstraintLayout {
             override fun afterTextChanged(p0: Editable?) {}
 
         })
+
+        checkBox.setOnClickListener {
+            viewState.first=checkBox.isChecked
+        }
     }
 
     fun getCheckState():Boolean{
