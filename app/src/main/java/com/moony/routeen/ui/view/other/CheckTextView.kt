@@ -18,17 +18,7 @@ class CheckTextView:ConstraintLayout {
     private lateinit var binding: SourceCustomCheckTextItemBinding
     private lateinit var checkBox:CheckBox
     private lateinit var editText:EditText
-    var checked=false
-    set(value){
-        checkBox.isChecked=value
-        field = value
-    }
 
-    var text=""
-    set(value){
-        editText.setText(value)
-        field=value
-    }
 
     private val viewState=CheckTextState(false,"")
     constructor(context: Context) : super(context) {
@@ -40,8 +30,8 @@ class CheckTextView:ConstraintLayout {
 
         initView()
         val typedArray=context.obtainStyledAttributes(attrs, R.styleable.CheckTextView)
-        checked=typedArray.getBoolean(R.styleable.CheckTextView_checked,false)
-        typedArray.getString(R.styleable.CheckTextView_text)?.let { text=it }
+        setChecked(typedArray.getBoolean(R.styleable.CheckTextView_checked,false))
+        typedArray.getString(R.styleable.CheckTextView_text)?.let { setText(it) }
         typedArray.recycle()
     }
 
@@ -49,10 +39,9 @@ class CheckTextView:ConstraintLayout {
         binding =
             SourceCustomCheckTextItemBinding.inflate(
                 LayoutInflater.from(context),
-                this,
-                true
+                this
             )
-        //SourceCustomCheckTextItemBinding.bind(this)
+
         val layoutParams=LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT)
         this.layoutParams=layoutParams
         checkBox=binding.sourceCustomCheckbox
@@ -74,20 +63,20 @@ class CheckTextView:ConstraintLayout {
     }
 
 
-//
-    //fun setChecked(isChecked:Boolean){
-    //    checkBox.isChecked=isChecked
-    //    viewState.checked=isChecked
-    //}
-//
-    //fun setText(text:String){
-    //    editText.setText(text)
-    //    viewState.text=text
-    //}
-//
-    //fun getText():String{
-    //    return viewState.text
-    //}
+
+    fun setChecked(isChecked:Boolean){
+        checkBox.isChecked=isChecked
+        viewState.checked=isChecked
+    }
+
+    fun setText(text:String){
+        editText.setText(text)
+        viewState.text=text
+    }
+
+    fun getText():String{
+        return viewState.text
+    }
 
     fun getCheckTextViewState(): CheckTextState {
         return viewState

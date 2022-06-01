@@ -10,7 +10,7 @@ import com.moony.routeen.data.entity.MemoDao
 import com.moony.routeen.utils.RoomConverter
 import com.moony.routeen.utils.RoomMemoConverter
 
-@Database(entities = [BusAlarmInfo::class, Memo::class],version = 1)
+@Database(entities = [BusAlarmInfo::class, Memo::class],version = 2)
 @TypeConverters(value = [RoomConverter::class,RoomMemoConverter::class])
 abstract class AppDatabase:RoomDatabase() {
     abstract fun busAlarmInfoDao(): BusAlarmInfoDao
