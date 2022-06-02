@@ -4,4 +4,13 @@
         <attr name="checked" format="boolean"/>
         <attr name="text" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="SlideUpLayout">
+        <attr name="moony_SlideUpLayout_exposureHeight" format="dimension"/>
+        <attr name="moony_SlideUpLayout_color" format="color"/>
+        <attr name="moony_SlideUpLayout_maxHeight" format="dimension"/>
+        <attr name="moony_SlideUpLayout_scrollViewId" format="reference"/>
+        <attr name="moony_SlideUpLayout_non_lineal_Id" format="reference"/>
+        <attr name="moony_SlideUpLayout_slideEnabled" format="boolean"/>
+    </declare-styleable>
 </resources>
