@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.moony.routeen.R
 import kotlin.math.min
 
-class RecyclerviewSwipeHelper<T>(
+class RecyclerviewSwipeHelper(
     private val recyclerViewAdapter : TodoListMemoViewAdapter,
-    private val recyclerView: RecyclerView,
-    private val swipeView:View)  : ItemTouchHelper.Callback() {
+    private val recyclerView: RecyclerView
+    )  : ItemTouchHelper.Callback() {
 
     // swipe_view 를 swipe 했을 때 <삭제> 화면이 보이도록 고정하기 위한 변수들
     private var currentPosition: Int? = null    // 현재 선택된 recycler view의 position

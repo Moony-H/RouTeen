@@ -21,9 +21,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.load.setOnClickListener(this)
-        binding.save.setOnClickListener(this)
-        binding.deleteAll.setOnClickListener(this)
+
 
         viewModel.allMemos.observe(this){
 
@@ -33,18 +31,6 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
     }
 
     override fun onClick(view: View?) {
-        when(view){
-            binding.load->{
-                viewModel.getAllMemo()
-            }
-            binding.save->{
-                val memo= TodoListMemoData()
-                viewModel.insertMemo(memo)
-            }
-            binding.deleteAll->{
-                viewModel.deleteAllMemoData()
-            }
 
-        }
     }
 }

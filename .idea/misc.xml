@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/add_circle-48px.xml" value="0.196" />
-        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/fragment_bus_time.xml" value="0.12" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_basic_memo.xml" value="0.2" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_check_edit_item.xml" value="0.25" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_check_text_item.xml" value="0.1875" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_memo.xml" value="0.15572916666666667" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_todo_list_memo.xml" value="0.15572916666666667" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_item_todo_list.xml" value="0.33" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_memo_todo_list.xml" value="0.2" />

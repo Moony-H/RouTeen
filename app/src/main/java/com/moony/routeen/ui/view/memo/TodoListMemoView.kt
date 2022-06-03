@@ -3,7 +3,6 @@ package com.moony.routeen.ui.view.memo
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,7 +14,7 @@ import com.moony.routeen.databinding.SourceCustomTodoListMemoBinding
 import com.moony.routeen.ui.adapter.RecyclerviewSwipeHelper
 import com.moony.routeen.ui.adapter.TodoListMemoViewAdapter
 
-class TodoListMemoView:MemoView {
+class TodoListMemoView:BaseMemoView {
 
     var todoListMemo = TodoListMemoData(1)
     private lateinit var binding: SourceCustomTodoListMemoBinding
@@ -44,7 +43,7 @@ class TodoListMemoView:MemoView {
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
                 this
             )
-        SourceCustomTodoListMemoBinding.bind(this)
+        //SourceCustomTodoListMemoBinding.bind(this)
 
 
         adapter = TodoListMemoViewAdapter(todoListMemo)

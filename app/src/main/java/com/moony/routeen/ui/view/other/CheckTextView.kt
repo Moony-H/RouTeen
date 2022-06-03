@@ -1,6 +1,7 @@
 package com.moony.routeen.ui.view.other
 
 import android.content.Context
+import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -81,4 +82,6 @@ class CheckTextView:ConstraintLayout {
     fun getCheckTextViewState(): CheckTextState {
         return viewState
     }
+
+
 }
