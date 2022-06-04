@@ -6,24 +6,28 @@ import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.moony.routeen.databinding.SourceCustomImageControlViewBinding
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ImageControlView:ConstraintLayout {
-    var isFocus = false
+    var isFocus = true
     private lateinit var binding: SourceCustomImageControlViewBinding
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onFinishInflate() {
         super.onFinishInflate()
         initView()
-
     }
+
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -32,6 +36,31 @@ class ImageControlView:ConstraintLayout {
         binding.sourceCustomImageControlClose.setOnClickListener {
             (parent as ViewGroup).removeView(this)
         }
+
+        binding.sourceCustomImageControlRotate.setOnTouchListener { view, motionEvent ->
+            Log.d("test","rotate button")
+            true
+        }
+
+    }
+
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when(event.actionMasked){
+            MotionEvent.ACTION_DOWN->{
+                setFocusOn()
+                Log.d("test","onTouch")
+                return true
+            }
+            MotionEvent.ACTION_MOVE->{
+
+                this.x=event.x+this.x-(this.width)/2
+                this.y=event.y+this.y-(this.height)/2
+            }
+        }
+        return super.onTouchEvent(event)
     }
 
 
@@ -50,5 +79,7 @@ class ImageControlView:ConstraintLayout {
         binding.sourceCustomImageControlFrame.visibility= VISIBLE
         isFocus=true
     }
+
+
 
 }
