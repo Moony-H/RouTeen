@@ -353,7 +353,7 @@ class SlideUpLayout: ViewGroup {
     }
 
 
-    inner class ViewDragHelperCallback : ViewDragHelper.Callback() {
+    open inner class ViewDragHelperCallback : ViewDragHelper.Callback() {
         override fun tryCaptureView(child: View, pointerId: Int): Boolean {
 
             return child == mSlideView

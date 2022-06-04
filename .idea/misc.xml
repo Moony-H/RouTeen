@@ -3,17 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable-v24/settings_icon.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable-v24/sync_48px.xml" value="0.196" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/add_48px.xml" value="0.261" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/add_circle-48px.xml" value="0.196" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/aspect_ratio_48px.xml" value="0.165" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/cancel-48px.xml" value="0.196" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/cancel_48px.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/change_circle-48px.xml" value="0.196" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/change_circle_48px.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/close_48px.xml" value="0.196" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/delete_button_circle.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/more_up-48px.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/more_up_48px.xml" value="0.196" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/rectangle_dot.xml" value="0.196" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/rectangle_dot_line.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/rectangle_line.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/resize_button_circle.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/rotate_button_circle.xml" value="0.261" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/sync_48px.xml" value="0.196" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/fragment_bus_time.xml" value="0.12" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_basic_memo.xml" value="0.2" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_check_edit_item.xml" value="0.25" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_check_text_item.xml" value="0.1875" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_image_control_view.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_memo.xml" value="0.15572916666666667" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_todo_list_memo.xml" value="0.15572916666666667" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_item_todo_list.xml" value="0.33" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_memo_todo_list.xml" value="0.2" />
-        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_recyclerview_add_button.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_recyclerview_add_button.xml" value="0.25" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_todo_list_memo.xml" value="0.25" />
       </map>
     </option>

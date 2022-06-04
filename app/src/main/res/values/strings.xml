@@ -2,4 +2,5 @@
     <string name="app_name">RouTeen</string>
     <string name="todo_list_memo_title_hint">To do list</string>
     <string name="basic_memo_title_hint">Memo</string>
+    <string name="image_static">image_static</string>
 </resources>

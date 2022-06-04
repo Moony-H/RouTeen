@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <RelativeLayout
+        android:id="@+id/source_custom_image_control_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/rectangle_line"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
+        android:background="@color/red"
+        />
+
+    <ImageView
+        android:id="@+id/source_custom_image_control_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/delete_button_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:contentDescription="@string/image_static" />
+    <ImageView
+        android:id="@+id/source_custom_image_control_resize"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/resize_button_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/image_static" />
+    <ImageView
+        android:id="@+id/source_custom_image_control_rotate"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/rotate_button_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/image_static" />
+
+
+
+</merge>
