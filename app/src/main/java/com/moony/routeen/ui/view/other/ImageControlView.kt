@@ -15,12 +15,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.moony.routeen.R
 import com.moony.routeen.databinding.SourceCustomImageControlViewBinding
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
+import kotlin.math.acos
+import kotlin.math.acosh
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class ImageControlView:ConstraintLayout {
     var isFocus = true
@@ -28,6 +29,7 @@ class ImageControlView:ConstraintLayout {
     lateinit var closeButton:ImageView
     lateinit var rotateButton:ImageView
     lateinit var resizeButton:ImageView
+    private var prevDegree=0.0f
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
@@ -70,6 +72,14 @@ class ImageControlView:ConstraintLayout {
         closeButton=binding.sourceCustomImageControlClose
         rotateButton=binding.sourceCustomImageControlRotate
         resizeButton=binding.sourceCustomImageControlResize
+        //GlobalScope.launch(Dispatchers.Main) {
+        //    while(true){
+        //        this@ImageControlView.rotation+=45.0F
+        //        Log.d("test","rotation: ${this@ImageControlView.rotation}")
+        //        delay(1000)
+        //    }
+//
+        //}
 
 
         binding.sourceCustomImageControlClose.setOnClickListener{
@@ -83,19 +93,62 @@ class ImageControlView:ConstraintLayout {
 
 
         }
-        binding.sourceCustomImageControlRotate.setOnTouchListener{ view, event->
-            Log.d("test","onTouch")
+        binding.sourceCustomImageControlRotate.setOnTouchListener { view, event ->
+            Log.d("test", "onTouch")
 
-            when(event.actionMasked){
-                MotionEvent.ACTION_DOWN->{
-                    Log.d("test","rotate action down")
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    Log.d("test", "rotate action down")
+
                     true
                 }
-                MotionEvent.ACTION_MOVE->{
-                    Log.d("test","rotate move enabled")
+                MotionEvent.ACTION_MOVE -> {
+                    //제 2 cos 법칙
+                    val centerX = this.x + this.width / 2
+                    val centerY = this.y + this.height / 2
+                    val touchX = event.x + this.x + view.x
+                    val touchY = event.y + this.y + view.y
+                    val buttonX = this.x + view.x + view.width / 2
+                    val buttonY = this.y + view.y + view.height / 2
+                    val buttonAndTouchDistance = //a
+                        getDistanceBetweenTwoPosition(buttonX, buttonY, touchX, touchY)
+                    val centerAndButtonDistance = //b
+                        getDistanceBetweenTwoPosition(centerX, centerY, buttonX, buttonY)
+                    val centerAndTouchDistance = //c
+                        getDistanceBetweenTwoPosition(centerX, centerY, touchX, touchY)
+
+                    val vectorTouchX=touchX-centerX
+                    val vectorTOuchY=touchY-centerY
+
+                    val vectorButtonX=buttonX-centerX
+                    val vectorButtonY=buttonY-centerY
+
+                    //외적으로 각도 방향 구함
+                    //안드로이드 내에선 외적의 부호의 반대임. 따라서 마이너스
+                    val vectorProduct=-(vectorButtonX*vectorTOuchY-vectorButtonY*vectorTouchX)
+
+
+                    //a^2 = b^2 + c^2 - 2bc*cosA
+                    //cosA = (b^2 + c^2 - a^2) / (2bc)
+                    val cosA =
+                        (centerAndButtonDistance.pow(2)+centerAndTouchDistance.pow(2)-buttonAndTouchDistance.pow(2))/(2*centerAndButtonDistance*centerAndTouchDistance)
+                    Log.d("test","cosA: $cosA")
+                    Log.d("test","vectorProduct: $vectorProduct")
+                    val currDegree=Math.toDegrees(acos(cosA).toDouble()).toFloat()
+                    if(vectorProduct<0){
+                        //시계 방향
+                        this.rotation += currDegree
+                    }
+                    else{
+                        //반시계 방향
+                        this.rotation-=currDegree
+                    }
+
+
+
                     true
                 }
-                else->{
+                else -> {
                     false
                 }
             }
@@ -150,6 +203,11 @@ class ImageControlView:ConstraintLayout {
         }
         return -1
     }
+
+    private fun getDistanceBetweenTwoPosition(x1:Float,y1:Float,x2:Float,y2:Float):Float{
+        return sqrt((x2-x1).pow(2)+(y2-y1).pow(2))
+    }
+
 
 
 
