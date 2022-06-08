@@ -29,6 +29,7 @@ class ImageControlView:ConstraintLayout {
     lateinit var closeButton:ImageView
     lateinit var rotateButton:ImageView
     lateinit var resizeButton:ImageView
+    lateinit var mainImage:ImageView
     private var prevDegree=0.0f
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -58,9 +59,11 @@ class ImageControlView:ConstraintLayout {
                 return true
             }
             MotionEvent.ACTION_MOVE->{
-
-                this.x=event.x+this.x-(this.width)/2
-                this.y=event.y+this.y-(this.height)/2
+                val parent=this.parent as View
+                val array=IntArray(2)
+                parent.getLocationOnScreen(array)
+                this.x=event.rawX-(this.width)/2-array[0]
+                this.y=event.rawY-(this.height)/2-array[1]
             }
         }
         return super.onTouchEvent(event)
@@ -72,6 +75,7 @@ class ImageControlView:ConstraintLayout {
         closeButton=binding.sourceCustomImageControlClose
         rotateButton=binding.sourceCustomImageControlRotate
         resizeButton=binding.sourceCustomImageControlResize
+        mainImage=binding.sourceCustomImageControlImageView
         //GlobalScope.launch(Dispatchers.Main) {
         //    while(true){
         //        this@ImageControlView.rotation+=45.0F
@@ -104,6 +108,7 @@ class ImageControlView:ConstraintLayout {
                 }
                 MotionEvent.ACTION_MOVE -> {
                     //제 2 cos 법칙
+                    Log.d("test","view location ${this.x}, ${this.y}")
                     val centerX = this.x + this.width / 2
                     val centerY = this.y + this.height / 2
                     val touchX = event.x + this.x + view.x
@@ -155,8 +160,29 @@ class ImageControlView:ConstraintLayout {
         }
 
         binding.sourceCustomImageControlResize.setOnTouchListener{ view, event->
-            Log.d("test","click resize")
-            false
+            when(event.actionMasked){
+                MotionEvent.ACTION_DOWN->{
+                    true
+                }
+                MotionEvent.ACTION_MOVE->{
+                    val centerX = this.x + this.width / 2
+                    val centerY = this.y + this.height / 2
+                    val touchX = event.x + this.x + view.x
+                    val touchY = event.y + this.y + view.y
+                    val buttonX = this.x + view.x + view.width / 2
+                    val buttonY = this.y + view.y + view.height / 2
+
+                    val params=this.layoutParams
+                    val diffX=touchX-centerX
+                    val diffY=centerY-touchY
+                    params.width=diffX.toInt()*2
+                    params.height=diffY.toInt()*2
+                    this.layoutParams=params
+
+                    true
+                }
+                else-> false
+            }
         }
 
 
