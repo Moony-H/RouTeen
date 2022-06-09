@@ -2,18 +2,19 @@ package com.moony.routeen.ui.view.other
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.moony.routeen.R
 import com.moony.routeen.databinding.SourceCustomImageControlViewBinding
-import kotlin.math.acos
-import kotlin.math.pow
-import kotlin.math.sqrt
+import kotlin.math.*
 
 class ImageControlView:ConstraintLayout {
     var isFocus = true
@@ -22,52 +23,88 @@ class ImageControlView:ConstraintLayout {
     lateinit var rotateButton:ImageView
     lateinit var resizeButton:ImageView
     lateinit var mainImage:ImageView
-    private var parentScreenX=0
-    private var parentScreenY=0
 
     private var prevDragRawPositionX=0f
     private var prevDragRawPositionY=0f
 
-    private var prevResizeRawPositionX=0f
-    private var prevResizeRawPositionY=0f
+    private var resizeCenterX=0f
+    private var resizeCenterY=0f
+    private var prevResizeLen=0f
+    private var resizeDegree=0f
 
-    private lateinit var parentLayout:ImageControlLayout
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    private var widthHeightRatio=0f
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
+    private var parentLayout:ImageControlLayout?=null
+    private var parentWidth=0
+    private var parentHeight=0
+
+    constructor(context: Context) : super(context){
+        val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
+        this.layoutParams=lp
+        initView()
     }
-    override fun onFinishInflate() {
-        super.onFinishInflate()
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs){
+        val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
+        this.layoutParams=lp
         initView()
     }
 
+    //constructor(context: Context,attrs: AttributeSet,defStyle:Int):super(context, attrs,defStyle){
+    //    val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
+    //    this.layoutParams=lp
+    //}
+
+
+
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        setFocusOn()
+        if(ev.actionMasked==MotionEvent.ACTION_DOWN){
+            setFocusOn()
+
+        }
         return super.onInterceptTouchEvent(ev)
     }
 
-
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        super.onLayout(changed, left, top, right, bottom)
-
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        Log.d("test","icv width: ${this.width}")
     }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        val lp=this.layoutParams
-
+        Log.d("test","onTouchEvent")
         when(event.actionMasked){
             MotionEvent.ACTION_DOWN->{
-                Log.d("test","focus on")
+                Log.d("test","layout action down")
                 prevDragRawPositionX=event.rawX
                 prevDragRawPositionY=event.rawY
+                val p=this.parent
+                if(p is ImageControlLayout){
+                    parentLayout=p
+                    parentWidth=p.width
+                    parentHeight=p.height
+                }
+                else{
+                    throw IllegalStateException("ImageControlView's parent must be ImageControlLayout")
+                }
                 return true
             }
             MotionEvent.ACTION_MOVE->{
-                this.x+=event.rawX-prevDragRawPositionX
-                this.y+=event.rawY-prevDragRawPositionY
+
+                val diffX=event.rawX-prevDragRawPositionX
+                val diffY=event.rawY-prevDragRawPositionY
+                val x=this.x
+                val y=this.y
+                parentLayout?.let {
+                    if((diffX+x)>0f &&(diffX+x+this.width<parentWidth))
+                        this.x+=diffX
+                    if((diffY+y)>0f &&(diffY+y+this.height<parentHeight))
+                        this.y+=diffY
+                }?:run{
+                    Log.d("what?","is null?")
+                }
+
+
+
                 prevDragRawPositionX=event.rawX
                 prevDragRawPositionY=event.rawY
             }
@@ -80,10 +117,8 @@ class ImageControlView:ConstraintLayout {
     @SuppressLint("ClickableViewAccessibility")
     private fun initView() {
 
-        val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
-        this.layoutParams=lp
 
-        //background=resources.getDrawable(R.drawable.rectangle_line)
+
         binding = SourceCustomImageControlViewBinding.inflate(LayoutInflater.from(context), this)
         closeButton=binding.sourceCustomImageControlClose
         rotateButton=binding.sourceCustomImageControlRotate
@@ -168,40 +203,55 @@ class ImageControlView:ConstraintLayout {
         binding.sourceCustomImageControlResize.setOnTouchListener{ view, event->
             when(event.actionMasked){
                 MotionEvent.ACTION_DOWN->{
-                    prevResizeRawPositionX=event.rawX
-                    prevResizeRawPositionY=event.rawY
+                    val list=IntArray(2)
+                    view.getLocationOnScreen(list)
+
+                    resizeCenterX = (list[0]+this.width / 2).toFloat()
+                    resizeCenterY = (list[1]+ this.height / 2).toFloat()
+                    resizeDegree=atan(abs(resizeCenterX-event.rawX)/abs(resizeCenterY-event.rawY))
+                    prevResizeLen=getDistanceBetweenTwoPosition(
+                        resizeCenterX,
+                        resizeCenterY,
+                        event.rawX,
+                        event.rawY
+                    )
                     true
                 }
                 MotionEvent.ACTION_MOVE->{
-                    val centerX = this.x + this.width / 2
-                    val centerY = this.y + this.height / 2
-                    val touchX = event.x + this.x + view.x
-                    val touchY = event.y + this.y + view.y
-                    val buttonX = this.x + view.x + view.width / 2
-                    val buttonY = this.y + view.y + view.height / 2
 
-                    val diffX=(event.rawX-prevResizeRawPositionX).toInt()
-                    val diffY=-(event.rawY-prevResizeRawPositionY).toInt()
 
+
+
+
+
+
+                    val length = getDistanceBetweenTwoPosition(
+                        resizeCenterX,
+                        resizeCenterY,
+                        event.rawX,
+                        event.rawY
+                    )
+                    Log.d("test","len $length")
+                    Log.d("test","raw ${event.rawX} ${event.rawY}")
+                    Log.d("test","center $resizeCenterX, $resizeCenterY")
+                    val diffLen=length-prevResizeLen
 
                     val parentParams=this.layoutParams
                     val mainImageParams=mainImage.layoutParams
-                    Log.d("now params","${parentParams.width}, ${parentParams.height}")
-                    Log.d("view sizes","${this.width}, ${this.height}")
-                    val diffWithParentParamsX=parentParams.width-mainImageParams.width
-                    val diffWithParentParamsY=parentParams.height-mainImageParams.height
-                    Log.d("diff","$diffX $diffY")
-                    parentParams.width=diffX*2+this.width
-                    parentParams.height=diffY*2+this.height
 
+
+                    parentParams.width=(diffLen * cos(resizeDegree)).toInt()*2+this.width
+                    parentParams.height=(diffLen* sin(resizeDegree)).toInt()*2+this.height
                     this.layoutParams=parentParams
 
-                    mainImageParams.width=diffX*2+mainImage.width
-                    mainImageParams.height=diffY*2+mainImage.height
+                    mainImageParams.width=(diffLen * cos(resizeDegree)).toInt()*2+mainImage.width
+                    mainImageParams.height=(diffLen* sin(resizeDegree)).toInt()*2+mainImage.height
                     mainImage.layoutParams=mainImageParams
 
-                    prevResizeRawPositionX=event.rawX
-                    prevResizeRawPositionY=event.rawY
+                    prevResizeLen=length
+
+
+
                     true
                 }
                 else-> false
@@ -216,11 +266,12 @@ class ImageControlView:ConstraintLayout {
 
 
     fun setFocusOff() {
-        binding.sourceCustomImageControlClose.visibility= GONE
-        binding.sourceCustomImageControlResize.visibility= GONE
-        binding.sourceCustomImageControlRotate.visibility= GONE
-        binding.sourceCustomImageControlFrame.visibility= GONE
+        binding.sourceCustomImageControlClose.visibility= INVISIBLE
+        binding.sourceCustomImageControlResize.visibility= INVISIBLE
+        binding.sourceCustomImageControlRotate.visibility= INVISIBLE
+        binding.sourceCustomImageControlFrame.visibility= INVISIBLE
         isFocus = false
+        Log.d("test","set focus off")
     }
 
     fun setFocusOn(){
@@ -230,6 +281,7 @@ class ImageControlView:ConstraintLayout {
         binding.sourceCustomImageControlFrame.visibility= VISIBLE
         this.bringToFront()
         isFocus=true
+        Log.d("test,","set focus on")
     }
 
     private fun getTouchedButton(x:Float,y:Float):Int{
