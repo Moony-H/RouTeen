@@ -12,5 +12,6 @@ class Converter {
         fun stringColorToIntColor(stringColor:String):Int{
             return Color.parseColor(stringColor)
         }
+
     }
 }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     >
     <ImageView
         android:id="@+id/source_custom_image_control_image_view"
@@ -15,7 +14,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:src="@mipmap/ic_launcher"
         />
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/source_custom_image_control_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -24,7 +23,10 @@
         app:layout_constraintBottom_toBottomOf="@id/source_custom_image_control_image_view"
         app:layout_constraintLeft_toLeftOf="@id/source_custom_image_control_image_view"
         app:layout_constraintRight_toRightOf="@id/source_custom_image_control_image_view"
-        />
+        >
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <ImageView
@@ -32,24 +34,24 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/delete_button_circle"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/source_custom_image_control_image_view"
+        app:layout_constraintRight_toLeftOf="@id/source_custom_image_control_image_view"
         android:contentDescription="@string/image_static" />
     <ImageView
         android:id="@+id/source_custom_image_control_resize"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/resize_button_circle"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/source_custom_image_control_image_view"
+        app:layout_constraintLeft_toRightOf="@id/source_custom_image_control_image_view"
         android:contentDescription="@string/image_static" />
     <ImageView
         android:id="@+id/source_custom_image_control_rotate"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/rotate_button_circle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/source_custom_image_control_image_view"
+        app:layout_constraintLeft_toRightOf="@id/source_custom_image_control_image_view"
         android:contentDescription="@string/image_static" />
 
 
