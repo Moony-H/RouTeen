@@ -3,6 +3,7 @@ package com.moony.routeen.ui.view.other
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.util.Log
 import android.view.*
@@ -63,17 +64,13 @@ class ImageControlView:ConstraintLayout {
         return super.onInterceptTouchEvent(ev)
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
-        Log.d("test","icv width: ${this.width}")
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        Log.d("test","onTouchEvent")
+
         when(event.actionMasked){
             MotionEvent.ACTION_DOWN->{
-                Log.d("test","layout action down")
+
                 prevDragRawPositionX=event.rawX
                 prevDragRawPositionY=event.rawY
 
@@ -86,7 +83,7 @@ class ImageControlView:ConstraintLayout {
                 return true
             }
             MotionEvent.ACTION_MOVE->{
-                Log.d("test","image control view position ${this.x}, ${this.y}")
+
                 val diffX=event.rawX-prevDragRawPositionX
                 val diffY=event.rawY-prevDragRawPositionY
                 val x=this.x
@@ -141,28 +138,24 @@ class ImageControlView:ConstraintLayout {
         resizeButton=binding.sourceCustomImageControlResize
         mainImage=binding.sourceCustomImageControlImageView
         binding.sourceCustomImageControlClose.setOnClickListener{
-            Log.d("test","close clicked")
             if(isFocus){
-                Log.d("test","click close")
                 (parent as ViewGroup).removeView(this)
-            }else{
-                Log.d("test","focus off")
             }
-
 
         }
         binding.sourceCustomImageControlRotate.setOnTouchListener { view, event ->
-            Log.d("test", "onTouch")
+
 
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
-                    Log.d("test", "rotate action down")
+
 
                     true
                 }
                 MotionEvent.ACTION_MOVE -> {
                     //제 2 cos 법칙
-                    Log.d("test","view location ${this.x}, ${this.y}")
+
+
                     val centerX = this.x + this.width / 2
                     val centerY = this.y + this.height / 2
 
@@ -193,8 +186,7 @@ class ImageControlView:ConstraintLayout {
                     //cosA = (b^2 + c^2 - a^2) / (2bc)
                     val cosA =
                         (centerAndButtonDistance.pow(2)+centerAndTouchDistance.pow(2)-buttonAndTouchDistance.pow(2))/(2*centerAndButtonDistance*centerAndTouchDistance)
-                    Log.d("test","cosA: $cosA")
-                    Log.d("test","vectorProduct: $vectorProduct")
+
                     val currDegree=Math.toDegrees(acos(cosA).toDouble()).toFloat()
                     if(vectorProduct<0){
                         //시계 방향
@@ -221,8 +213,11 @@ class ImageControlView:ConstraintLayout {
                     val list=IntArray(2)
                     this.getLocationOnScreen(list)
 
-                    resizeCenterX = (list[0]+this.width / 2).toFloat()
-                    resizeCenterY = (list[1]+ this.height / 2).toFloat()
+                    val rect=Rect()
+                    this.getHitRect(rect)
+
+                    resizeCenterX = rect.exactCenterX()
+                    resizeCenterY = rect.exactCenterY()
                     resizeDegree=atan(abs(resizeCenterX-event.rawX)/abs(resizeCenterY-event.rawY))
                     prevResizeLen=getDistanceBetweenTwoPosition(
                         resizeCenterX,
@@ -246,21 +241,19 @@ class ImageControlView:ConstraintLayout {
                         event.rawX,
                         event.rawY
                     )
-                    Log.d("test","len $length")
-                    Log.d("test","raw ${event.rawX} ${event.rawY}")
-                    Log.d("test","center $resizeCenterX, $resizeCenterY")
+
                     val diffLen=length-prevResizeLen
 
                     val parentParams=this.layoutParams
                     val mainImageParams=mainImage.layoutParams
 
 
-                    parentParams.width=(diffLen * cos(resizeDegree)).toInt()*2+this.width
-                    parentParams.height=(diffLen* sin(resizeDegree)).toInt()*2+this.height
+                    parentParams.width=(diffLen).toInt()*2+this.width
+                    parentParams.height=(diffLen).toInt()*2+this.height
                     this.layoutParams=parentParams
 
-                    mainImageParams.width=(diffLen * cos(resizeDegree)).toInt()*2+mainImage.width
-                    mainImageParams.height=(diffLen* sin(resizeDegree)).toInt()*2+mainImage.height
+                    mainImageParams.width=(diffLen).toInt()*2+mainImage.width
+                    mainImageParams.height=(diffLen).toInt()*2+mainImage.height
                     mainImage.layoutParams=mainImageParams
 
                     prevResizeLen=length
@@ -286,7 +279,7 @@ class ImageControlView:ConstraintLayout {
         binding.sourceCustomImageControlRotate.visibility= INVISIBLE
         binding.sourceCustomImageControlFrame.visibility= INVISIBLE
         isFocus = false
-        Log.d("test","set focus off")
+        Log.d("ImageControlView","set focus off")
     }
 
     fun setFocusOn(){
@@ -296,30 +289,9 @@ class ImageControlView:ConstraintLayout {
         binding.sourceCustomImageControlFrame.visibility= VISIBLE
         this.bringToFront()
         isFocus=true
-        Log.d("test,","set focus on")
+        Log.d("ImageControlView,","set focus on")
     }
 
-    private fun getTouchedButton(x:Float,y:Float):Int{
-        val list=IntArray(2)
-        closeButton.getLocationOnScreen(list)
-        if(x<=list[0]+closeButton.width && x>=list[0]&&
-                y<=list[1]+closeButton.width && y>=list[1]){
-                    Log.d("test","is close")
-            return closeButton.id
-        }
-        rotateButton.getLocationOnScreen(list)
-        if(x<=list[0]+rotateButton.width && x>=list[0] &&
-                y<=list[1]+rotateButton.height && y>=list[1]){
-            return rotateButton.id
-        }
-
-        resizeButton.getLocationOnScreen(list)
-        if(x<=list[0]+resizeButton.width && x>=list[0] &&
-            y<=list[1]+resizeButton.height && y>=list[1]){
-            return resizeButton.id
-        }
-        return -1
-    }
 
     private fun getDistanceBetweenTwoPosition(x1:Float,y1:Float,x2:Float,y2:Float):Float{
         return sqrt((x2-x1).pow(2)+(y2-y1).pow(2))
