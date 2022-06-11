@@ -36,14 +36,9 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
         val imageControlView=ImageControlView(baseContext)
         //val layoutParams=ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
         imageControlView.id=View.generateViewId()
-
         binding.activityMainParent.addView(imageControlView)
-        val textView= EditText(baseContext)
-        binding.activityMainParent.addView(textView)
-        val temp=binding.activityMainParent.getChildAt(0)
-        if(temp is ImageControlView){
-            Log.d("test","done....")
-        }
+
+
         binding.activityMainParent.invalidate()
         val constraintSet= ConstraintSet()
         //constraintSet.clone(binding.activityMainParent)

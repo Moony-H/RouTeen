@@ -4,20 +4,27 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 
 
 class ImageControlLayout:ConstraintLayout {
 
-    constructor(context: Context):super(context)
+    constructor(context: Context):super(context){
+
+    }
     constructor(context:Context,attrs: AttributeSet):super(context, attrs){
 
     }
 
 
-    override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
+    private fun initView(){
+        if(this.id== View.NO_ID)
+            this.id= generateViewId()
     }
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         when(ev.actionMasked){
@@ -28,13 +35,6 @@ class ImageControlLayout:ConstraintLayout {
         return super.onInterceptTouchEvent(ev)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        //if(event.actionMasked==MotionEvent.ACTION_DOWN){
-        //    setAllImageControlViewFocusOff()
-        //}
-        return super.onTouchEvent(event)
-    }
 
 
     fun getAllImageControlView():List<ImageControlView>{
