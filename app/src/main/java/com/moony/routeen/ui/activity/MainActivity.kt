@@ -32,9 +32,8 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
         val imageControlView=ImageControlView(baseContext)
         //val layoutParams=ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
         imageControlView.id=View.generateViewId()
-        binding.activityMainParent.addView(imageControlView)
+        binding.testMovie.addView(imageControlView)
 
-        Log.d("test","")
         binding.activityMainParent.invalidate()
         val constraintSet= ConstraintSet()
         //constraintSet.clone(binding.activityMainParent)

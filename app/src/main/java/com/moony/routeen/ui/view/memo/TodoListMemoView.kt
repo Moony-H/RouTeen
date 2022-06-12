@@ -23,23 +23,34 @@ class TodoListMemoView:BaseMemoView {
     private lateinit var adapter: TodoListMemoViewAdapter
     private lateinit var swipeHelperCallback: RecyclerviewSwipeHelper
 
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet, todoListMemoData: TodoListMemoData) : super(
+    constructor(context: Context) : super(context){
+        init()
+    }
+    constructor(context: Context,data: TodoListMemoData) : super(context,data){
+        this.todoListMemo = data
+        init()
+    }
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs){
+        init()
+    }
+    constructor(context: Context, attrs: AttributeSet, data: TodoListMemoData) : super(
         context,
-        attrs
+        attrs,
+        data
     ) {
-        this.todoListMemo = todoListMemoData
+        this.todoListMemo = data
+        init()
+
 
     }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        initView()
+        init()
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun initView() {
+    private fun init() {
         binding =
             SourceMemoTodoListBinding.inflate(
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,

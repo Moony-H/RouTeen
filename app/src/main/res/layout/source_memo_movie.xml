@@ -92,8 +92,10 @@
         android:minHeight="5dp"
         android:maxHeight="50dp"
         android:layout_marginTop="5dp"
+        android:isIndicator="false"
         />
     <com.moony.routeen.ui.view.other.LinedEditText
+        android:id="@+id/source_memo_movie_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

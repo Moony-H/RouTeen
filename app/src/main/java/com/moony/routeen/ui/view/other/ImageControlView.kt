@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.graphics.drawable.toBitmap
 import com.moony.routeen.data.structure.other.ImageControlViewState
 import com.moony.routeen.databinding.SourceCustomImageControlViewBinding
+import com.moony.routeen.ui.view.memo.MovieMemoView
 import kotlin.math.*
 
 class ImageControlView:ConstraintLayout {
@@ -109,6 +110,10 @@ class ImageControlView:ConstraintLayout {
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         val p=this.parent
+        Log.d("test","${p}")
+        if(p is MovieMemoView){
+            Log.d("its","movie")
+        }
         if(p is ImageControlLayout)
             parentLayout=p
         else
