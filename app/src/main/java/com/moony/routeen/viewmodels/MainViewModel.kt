@@ -17,25 +17,25 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MemoRepository):ViewModel() {
 
-    private val _allMemos=MutableLiveData<List<com.moony.routeen.data.structure.memo.MemoData>>()
-    val allMemos:LiveData<List<com.moony.routeen.data.structure.memo.MemoData>>
+    private val _allMemos=MutableLiveData<List<com.moony.routeen.data.structure.memo.BaseMemoData>>()
+    val allMemos:LiveData<List<com.moony.routeen.data.structure.memo.BaseMemoData>>
         get()=_allMemos
-    fun insertMemo(memoData: com.moony.routeen.data.structure.memo.MemoData){
+    fun insertMemo(baseMemoData: com.moony.routeen.data.structure.memo.BaseMemoData){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertMemo(Memo(memoData,MemoType.TodoListMemo))
+            repository.insertMemo(Memo(baseMemoData,MemoType.TodoListMemo))
         }
     }
 
     fun getAllMemo(){
         viewModelScope.launch(Dispatchers.IO){
             val data=repository.getAllMemo()
-            val response= mutableListOf<com.moony.routeen.data.structure.memo.MemoData>()
+            val response= mutableListOf<com.moony.routeen.data.structure.memo.BaseMemoData>()
 
             data.forEach {
                 if(it.memoType==MemoType.TodoListMemo){
-                    val temp= it.memoData as TodoListMemoData
+                    val temp= it.baseMemoData as TodoListMemoData
                     Log.d("test", "func call ${temp.memoType}")
-                    response.add(it.memoData as TodoListMemoData)
+                    response.add(it.baseMemoData as TodoListMemoData)
 
                 }
 

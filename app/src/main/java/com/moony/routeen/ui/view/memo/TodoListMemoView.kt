@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.moony.routeen.data.structure.memo.TodoListMemoData
-import com.moony.routeen.databinding.SourceCustomTodoListMemoBinding
+
+import com.moony.routeen.databinding.SourceMemoTodoListBinding
+
 import com.moony.routeen.ui.adapter.RecyclerviewSwipeHelper
 import com.moony.routeen.ui.adapter.TodoListMemoViewAdapter
 
 class TodoListMemoView:BaseMemoView {
 
     var todoListMemo = TodoListMemoData(1)
-    private lateinit var binding: SourceCustomTodoListMemoBinding
+    private lateinit var binding: SourceMemoTodoListBinding
     private lateinit var adapter: TodoListMemoViewAdapter
     private lateinit var swipeHelperCallback: RecyclerviewSwipeHelper
 
@@ -39,7 +41,7 @@ class TodoListMemoView:BaseMemoView {
     @SuppressLint("ClickableViewAccessibility")
     private fun initView() {
         binding =
-            SourceCustomTodoListMemoBinding.inflate(
+            SourceMemoTodoListBinding.inflate(
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
                 this
             )
@@ -66,7 +68,7 @@ class TodoListMemoView:BaseMemoView {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         swipeHelperCallback.releaseSwipedViewHolder(binding.sourceTodoListRecyclerView)
         return super.onInterceptTouchEvent(ev)
     }

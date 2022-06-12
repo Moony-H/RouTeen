@@ -1,6 +1,8 @@
 package com.moony.routeen.data
 
-enum class MemoType(val num:Int) {
-    Normal(0),
+import com.moony.routeen.ui.view.memo.BasicMemoView
+
+ enum class  MemoType(val num:Int) {
+    BasicMemo(0),
     TodoListMemo(1)
 }

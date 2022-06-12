@@ -10,9 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.moony.routeen.data.structure.other.ImageControlViewState
 
 
-class ImageControlLayout:ConstraintLayout {
+open class ImageControlLayout:ConstraintLayout {
 
     constructor(context: Context):super(context){
 
@@ -56,6 +57,15 @@ class ImageControlLayout:ConstraintLayout {
                 }
             }
         }
+    }
+
+    fun getAllImageControlViewState():List<ImageControlViewState>{
+        val list= mutableListOf<ImageControlViewState>()
+        val views=getAllImageControlView()
+        views.forEach {
+            list.add(it.getImageControlViewState())
+        }
+        return list
     }
 
 

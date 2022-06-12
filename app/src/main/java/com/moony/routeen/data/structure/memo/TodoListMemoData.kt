@@ -1,9 +1,9 @@
 package com.moony.routeen.data.structure.memo
 
 import com.moony.routeen.data.MemoType
-import com.moony.routeen.data.structure.basic.Pair
+import com.moony.routeen.data.structure.other.CheckTextState
 
-class TodoListMemoData(): MemoData() {
+class TodoListMemoData(): BaseMemoData() {
 
 
     //밖에서 함부로 못건드리게
@@ -22,11 +22,11 @@ class TodoListMemoData(): MemoData() {
 
     }
 
-    fun addTodoList(pair:CheckTextState){
+    fun addTodoList(pair: CheckTextState){
         _todoList.add(pair)
     }
 
-    fun popTodoList():CheckTextState{
+    fun popTodoList(): CheckTextState {
         return _todoList.removeLast()
     }
 
@@ -34,7 +34,7 @@ class TodoListMemoData(): MemoData() {
         _todoList.removeAt(index)
     }
 
-    fun setPairAt(index: Int,pair:CheckTextState){
+    fun setPairAt(index: Int,pair: CheckTextState){
         _todoList[index]=pair
     }
 

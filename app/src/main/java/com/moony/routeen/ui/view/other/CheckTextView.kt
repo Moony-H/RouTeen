@@ -1,7 +1,6 @@
 package com.moony.routeen.ui.view.other
 
 import android.content.Context
-import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -9,10 +8,8 @@ import android.view.LayoutInflater
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.DataBindingUtil
 import com.moony.routeen.R
-import com.moony.routeen.data.structure.basic.Pair
-import com.moony.routeen.data.structure.memo.CheckTextState
+import com.moony.routeen.data.structure.other.CheckTextState
 import com.moony.routeen.databinding.SourceCustomCheckTextItemBinding
 
 class CheckTextView:ConstraintLayout {
@@ -21,7 +18,7 @@ class CheckTextView:ConstraintLayout {
     private lateinit var editText:EditText
 
 
-    private val viewState=CheckTextState(false,"")
+    private val viewState= CheckTextState(false,"")
     constructor(context: Context) : super(context) {
         initView()
     }

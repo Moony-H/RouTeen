@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.moony.routeen.R
-import com.moony.routeen.ui.view.other.CheckTextView
-import com.moony.routeen.data.structure.basic.Pair
-import com.moony.routeen.data.structure.memo.CheckTextState
+import com.moony.routeen.data.structure.other.CheckTextState
 import com.moony.routeen.data.structure.memo.TodoListMemoData
 import com.moony.routeen.databinding.SourceItemTodoListBinding
 import com.moony.routeen.databinding.SourceRecyclerviewAddButtonBinding
@@ -84,7 +82,7 @@ class TodoListMemoViewAdapter(private val list: TodoListMemoData): RecyclerView.
 
     class CheckViewHolder(val binding:SourceItemTodoListBinding ): RecyclerView.ViewHolder(binding.root) {
         var swiped=false
-        fun bind(item:CheckTextState,onClick: (RecyclerView.ViewHolder) -> Unit){
+        fun bind(item: CheckTextState, onClick: (RecyclerView.ViewHolder) -> Unit){
             binding.checkTextState=item
             binding.sourceItemTodoListDeleteButton.setOnClickListener {
                 onClick(this)

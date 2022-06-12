@@ -3,7 +3,6 @@ package com.moony.routeen.ui.view.memo
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import com.moony.routeen.data.structure.memo.TodoListMemoData
 import com.moony.routeen.databinding.SourceCustomBasicMemoBinding
 
 class BasicMemoView: BaseMemoView {

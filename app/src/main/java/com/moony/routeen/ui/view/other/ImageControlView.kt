@@ -2,17 +2,16 @@ package com.moony.routeen.ui.view.other
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
 import android.graphics.Rect
+import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import com.moony.routeen.R
+import androidx.core.graphics.drawable.toBitmap
+import com.moony.routeen.data.structure.other.ImageControlViewState
 import com.moony.routeen.databinding.SourceCustomImageControlViewBinding
 import kotlin.math.*
 
@@ -32,8 +31,6 @@ class ImageControlView:ConstraintLayout {
     private var prevResizeLen=0f
     private var resizeDegree=0f
 
-    private var widthHeightRatio=0f
-
     private lateinit var parentLayout:ImageControlLayout
     private var parentWidth=0
     private var parentHeight=0
@@ -49,10 +46,13 @@ class ImageControlView:ConstraintLayout {
         initView()
     }
 
-    //constructor(context: Context,attrs: AttributeSet,defStyle:Int):super(context, attrs,defStyle){
-    //    val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
-    //    this.layoutParams=lp
-    //}
+    constructor(context: Context, attrs: AttributeSet,state: ImageControlViewState) : super(context, attrs){
+        val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
+        this.layoutParams=lp
+        initView()
+        setImageControlViewState(state)
+    }
+
 
 
 
@@ -229,12 +229,6 @@ class ImageControlView:ConstraintLayout {
                 }
                 MotionEvent.ACTION_MOVE->{
 
-
-
-
-
-
-
                     val length = getDistanceBetweenTwoPosition(
                         resizeCenterX,
                         resizeCenterY,
@@ -295,6 +289,29 @@ class ImageControlView:ConstraintLayout {
 
     private fun getDistanceBetweenTwoPosition(x1:Float,y1:Float,x2:Float,y2:Float):Float{
         return sqrt((x2-x1).pow(2)+(y2-y1).pow(2))
+    }
+
+    fun setImageControlViewState(state: ImageControlViewState){
+        mainImage.setImageBitmap(state.bitmap)
+        this.rotation=state.rotation
+        val lp=this.layoutParams
+        lp.width=state.width
+        lp.height=state.height
+        this.layoutParams=lp
+        this.x=state.locationX
+        this.y=state.locationY
+    }
+
+    fun getImageControlViewState():ImageControlViewState{
+
+        return ImageControlViewState(
+            (mainImage.drawable as BitmapDrawable).bitmap,
+            this.rotation,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        )
     }
 
 

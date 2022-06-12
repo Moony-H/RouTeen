@@ -5,14 +5,10 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
-import com.moony.routeen.data.structure.memo.TodoListMemoData
 import com.moony.routeen.databinding.ActivityMainBinding
 import com.moony.routeen.ui.view.other.ImageControlView
 import com.moony.routeen.viewmodels.MainViewModel
@@ -38,7 +34,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
         imageControlView.id=View.generateViewId()
         binding.activityMainParent.addView(imageControlView)
 
-
+        Log.d("test","")
         binding.activityMainParent.invalidate()
         val constraintSet= ConstraintSet()
         //constraintSet.clone(binding.activityMainParent)

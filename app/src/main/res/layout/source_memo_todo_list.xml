@@ -15,7 +15,7 @@
         android:id="@+id/source_todo_list_title_edit_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/todo_list_memo_title_hint"
+        android:hint="@string/memo_todo_list_title_hint"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="@id/source_todo_list_middle_guid"

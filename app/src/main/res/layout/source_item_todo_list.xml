@@ -6,7 +6,7 @@
     <data>
         <variable
             name="check_text_state"
-            type="com.moony.routeen.data.structure.memo.CheckTextState" />
+            type="com.moony.routeen.data.structure.other.CheckTextState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
