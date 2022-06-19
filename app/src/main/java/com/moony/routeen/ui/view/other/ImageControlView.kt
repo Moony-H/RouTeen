@@ -11,6 +11,7 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.graphics.drawable.toBitmap
+import com.moony.routeen.R
 import com.moony.routeen.data.structure.other.ImageControlViewState
 import com.moony.routeen.databinding.SourceCustomImageControlViewBinding
 import com.moony.routeen.ui.view.memo.MovieMemoView
@@ -41,16 +42,35 @@ class ImageControlView:ConstraintLayout {
         this.layoutParams=lp
         initView()
     }
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs){
+
+    constructor(context: Context, state: ImageControlViewState) : super(context){
         val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
         this.layoutParams=lp
         initView()
+        setImageControlViewState(state)
+
+    }
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs){
+        val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
+        this.layoutParams=lp
+        initView()
+        attrs?.let {
+            val typeArray = context.obtainStyledAttributes(attrs, R.styleable.ImageControlView)
+            this.mainImage.setImageResource(typeArray.getResourceId(R.styleable.ImageControlView_src,R.mipmap.ic_launcher))
+        }
+
     }
 
-    constructor(context: Context, attrs: AttributeSet,state: ImageControlViewState) : super(context, attrs){
+
+
+    constructor(context: Context, attrs: AttributeSet?,state: ImageControlViewState) : super(context, attrs){
         val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
         this.layoutParams=lp
         initView()
+        attrs?.let {
+            val typeArray = context.obtainStyledAttributes(attrs, R.styleable.ImageControlView)
+            this.mainImage.setImageResource(typeArray.getResourceId(R.styleable.ImageControlView_src,R.mipmap.ic_launcher))
+        }
         setImageControlViewState(state)
     }
 
@@ -110,19 +130,18 @@ class ImageControlView:ConstraintLayout {
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         val p=this.parent
-        Log.d("test","${p}")
-        if(p is MovieMemoView){
-            Log.d("its","movie")
-        }
+
         if(p is ImageControlLayout)
             parentLayout=p
         else
             throw IllegalStateException("ImageControlView's parent must be ImageControlLayout")
 
-        val constraintSet=ConstraintSet()
-        constraintSet.clone(parentLayout)
         if(this.id==View.NO_ID)
             this.id= generateViewId()
+
+        val constraintSet=ConstraintSet()
+        constraintSet.clone(parentLayout)
+
         constraintSet.connect(this.id, ConstraintSet.TOP, parentLayout.id, ConstraintSet.TOP, )
         constraintSet.connect(this.id, ConstraintSet.BOTTOM, parentLayout.id, ConstraintSet.BOTTOM, )
         constraintSet.connect(this.id, ConstraintSet.LEFT, parentLayout.id, ConstraintSet.LEFT, )
@@ -134,14 +153,18 @@ class ImageControlView:ConstraintLayout {
     private fun initView() {
 
 
-
-        val lp=LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
-
         binding = SourceCustomImageControlViewBinding.inflate(LayoutInflater.from(context), this)
         closeButton=binding.sourceCustomImageControlClose
         rotateButton=binding.sourceCustomImageControlRotate
         resizeButton=binding.sourceCustomImageControlResize
         mainImage=binding.sourceCustomImageControlImageView
+        if(mainImage.x<=10f || mainImage.y<=10f){
+            val lp=mainImage.layoutParams
+            lp.width=200
+            lp.height=200
+            mainImage.layoutParams=lp
+        }
+
         binding.sourceCustomImageControlClose.setOnClickListener{
             if(isFocus){
                 (parent as ViewGroup).removeView(this)

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.moony.routeen.R
 import com.moony.routeen.data.structure.other.CheckTextState
 import com.moony.routeen.databinding.SourceCustomCheckTextItemBinding
@@ -39,7 +40,7 @@ class CheckTextView:ConstraintLayout {
                 LayoutInflater.from(context),
                 this
             )
-
+        this.setBackgroundColor(ContextCompat.getColor(context,R.color.background))
         val layoutParams=LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT)
         this.layoutParams=layoutParams
         checkBox=binding.sourceCustomCheckbox

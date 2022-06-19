@@ -13,4 +13,9 @@
         <attr name="moony_SlideUpLayout_non_lineal_Id" format="reference"/>
         <attr name="moony_SlideUpLayout_slideEnabled" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="ImageControlView">
+        <attr name="src" format="reference"/>
+
+    </declare-styleable>
 </resources>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -22,11 +23,18 @@ open class ImageControlLayout:ConstraintLayout {
 
     }
 
-
-    private fun initView(){
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
         if(this.id== View.NO_ID)
             this.id= generateViewId()
+        for(i in 0 until childCount){
+            val view=getChildAt(i)
+            if(view.id==View.NO_ID)
+                view.id= generateViewId()
+        }
     }
+
+
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         when(ev.actionMasked){
             MotionEvent.ACTION_DOWN->{

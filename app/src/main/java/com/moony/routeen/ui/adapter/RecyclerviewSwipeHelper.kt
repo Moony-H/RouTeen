@@ -31,20 +31,35 @@ class RecyclerviewSwipeHelper(
         )
     }
 
+    override fun onMoved(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        fromPos: Int,
+        target: RecyclerView.ViewHolder,
+        toPos: Int,
+        x: Int,
+        y: Int
+    ) {
+        super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y)
+        Log.d("test", "long")
+        recyclerViewAdapter.swapData(fromPos, toPos)
+    }
     // 드래그 일어날 때 동작 (롱터치 후 드래그)
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        // 리사이클러뷰에서 현재 선택된 데이터와 드래그한 위치에 있는 데이터를 교환
-        Log.d("test", "long touch")
-        viewHolder.layoutPosition
-        val fromPos: Int = viewHolder.absoluteAdapterPosition
-        val toPos: Int = target.absoluteAdapterPosition
-        recyclerViewAdapter.swapData(fromPos, toPos)
+
+        //// 리사이클러뷰에서 현재 선택된 데이터와 드래그한 위치에 있는 데이터를 교환
+        //val fromPos: Int = viewHolder.absoluteAdapterPosition
+        //val toPos: Int = target.absoluteAdapterPosition
+        //super.onMoved(recyclerView,viewHolder,fromPos,viewHolder,toPos,0,0)
+        //if(fromPos==toPos)
+        //    return false
         return true
     }
+
 
     // 스와이프 일어날 때 동작
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

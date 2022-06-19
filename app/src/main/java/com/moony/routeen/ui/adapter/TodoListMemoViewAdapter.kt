@@ -49,9 +49,12 @@ class TodoListMemoViewAdapter(private val list: TodoListMemoData): RecyclerView.
 
                 if(view.swiped)
                     view.binding.sourceItemTodoListSwipeView.animate().x(0f).start()
-
+                Log.d("test","bind")
                 view.bind(list.todoList[position]){ viewHolder->
+                    Log.d("test","list clicked")
+                    Log.d("test","list ${list.todoList.size}")
                     list.removeTodoListAt(viewHolder.layoutPosition)
+                    Log.d("test","list ${list.todoList.size}")
                     notifyItemRemoved(viewHolder.layoutPosition)
                 }
             }
@@ -68,13 +71,13 @@ class TodoListMemoViewAdapter(private val list: TodoListMemoData): RecyclerView.
     }
 
     fun swapData(fromPos: Int, toPos: Int) {
-        Log.d("test","swap data $fromPos $toPos")
-        if(fromPos<0 || toPos>=list.getSize()){
-
+        if(toPos>=list.getSize()){
             return
         }
 
-        Collections.swap(list.todoList, fromPos, toPos)
+
+
+        list.swapTodoList(fromPos,toPos)
         notifyItemMoved(fromPos, toPos)
     }
 
@@ -85,6 +88,7 @@ class TodoListMemoViewAdapter(private val list: TodoListMemoData): RecyclerView.
         fun bind(item: CheckTextState, onClick: (RecyclerView.ViewHolder) -> Unit){
             binding.checkTextState=item
             binding.sourceItemTodoListDeleteButton.setOnClickListener {
+                Log.d("Clicked","clicked")
                 onClick(this)
             }
         }

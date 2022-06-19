@@ -5,18 +5,17 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.moony.routeen.data.structure.memo.TodoListMemoData
-
 import com.moony.routeen.databinding.SourceMemoTodoListBinding
-
 import com.moony.routeen.ui.adapter.RecyclerviewSwipeHelper
 import com.moony.routeen.ui.adapter.TodoListMemoViewAdapter
 
-class TodoListMemoView:BaseMemoView {
+class TestMemo:ConstraintLayout {
 
     var todoListMemo = TodoListMemoData(1)
     private lateinit var binding: SourceMemoTodoListBinding
@@ -26,24 +25,16 @@ class TodoListMemoView:BaseMemoView {
     constructor(context: Context) : super(context){
         init()
     }
-    constructor(context: Context,data: TodoListMemoData) : super(context,data){
-        this.todoListMemo = data
-        init()
-    }
+
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs){
         init()
     }
-    constructor(context: Context, attrs: AttributeSet, data: TodoListMemoData) : super(
-        context,
-        attrs,
-        data
-    ) {
-        this.todoListMemo = data
+
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         init()
-
-
     }
-
 
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
@@ -65,12 +56,12 @@ class TodoListMemoView:BaseMemoView {
             }
         ItemTouchHelper(swipeHelperCallback).attachToRecyclerView(binding.sourceTodoListRecyclerView)
         binding.sourceTodoListTitleEditText.setText(todoListMemo.title)
-        //binding.sourceTodoListRecyclerView.addItemDecoration(
-        //    DividerItemDecoration(
-        //        this.context,
-        //        RecyclerView.VERTICAL
-        //    )
-        //)
+        binding.sourceTodoListRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this.context,
+                RecyclerView.VERTICAL
+            )
+        )
 
     }
 

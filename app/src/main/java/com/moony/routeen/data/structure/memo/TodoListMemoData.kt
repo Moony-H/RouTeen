@@ -6,7 +6,6 @@ import com.moony.routeen.data.structure.other.CheckTextState
 class TodoListMemoData(): BaseMemoData() {
 
 
-    //밖에서 함부로 못건드리게
     private val _todoList= mutableListOf<CheckTextState>()
     val todoList:List<CheckTextState>
         get()=_todoList
@@ -24,6 +23,12 @@ class TodoListMemoData(): BaseMemoData() {
 
     fun addTodoList(pair: CheckTextState){
         _todoList.add(pair)
+    }
+
+    fun swapTodoList(a:Int,b:Int){
+        val temp=_todoList[a]
+        _todoList[a]=_todoList[b]
+        _todoList[b]=_todoList[a]
     }
 
     fun popTodoList(): CheckTextState {
