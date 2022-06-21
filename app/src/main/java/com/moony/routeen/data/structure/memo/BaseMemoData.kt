@@ -9,5 +9,5 @@ abstract class BaseMemoData {
     var memoType=MemoType.BaseMemo
     var title=""
     var imageControlViewList= mutableListOf<ImageControlViewState>()
-    var date= SimpleDateFormat("yyyy.mm.dd",Locale.KOREA).format(Date())
+    var date: String = SimpleDateFormat("yyyy.mm.dd",Locale.KOREA).format(Date())
 }

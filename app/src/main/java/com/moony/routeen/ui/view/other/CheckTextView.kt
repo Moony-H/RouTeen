@@ -40,7 +40,7 @@ class CheckTextView:ConstraintLayout {
                 LayoutInflater.from(context),
                 this
             )
-        this.setBackgroundColor(ContextCompat.getColor(context,R.color.background))
+        this.setBackgroundColor(ContextCompat.getColor(context,R.color.memo_background))
         val layoutParams=LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT)
         this.layoutParams=layoutParams
         checkBox=binding.sourceCustomCheckbox

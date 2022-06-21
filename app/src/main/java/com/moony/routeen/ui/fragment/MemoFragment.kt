@@ -1,9 +1,7 @@
 package com.moony.routeen.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import com.moony.routeen.databinding.FragmentMemoBinding
 
@@ -18,7 +16,8 @@ class MemoFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding=FragmentMemoBinding.inflate(inflater,container,false)
-
+        val toolbar=binding.fragmentMemoToolbar
+        
         return binding.root
 
     }
@@ -26,5 +25,9 @@ class MemoFragment:Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding=null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
