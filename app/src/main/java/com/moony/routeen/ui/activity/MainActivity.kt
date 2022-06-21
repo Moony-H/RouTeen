@@ -3,14 +3,14 @@ package com.moony.routeen.ui.activity
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintSet
+import androidx.fragment.app.commit
+import com.moony.routeen.R
 import com.moony.routeen.databinding.ActivityMainBinding
-import com.moony.routeen.ui.view.other.ImageControlView
+import com.moony.routeen.ui.fragment.MemoFragment
 import com.moony.routeen.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +26,12 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportFragmentManager.commit {
+            add(
+                R.id.activity_main_container,
+                MemoFragment(),
+            )
+        }
 
 
 
