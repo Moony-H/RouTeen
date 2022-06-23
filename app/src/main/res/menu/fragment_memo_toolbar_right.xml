@@ -11,5 +11,10 @@
         android:id="@+id/frag_memo_toolbar_alarm"
         android:title="Alarm"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/frag_memo_test_load"
+        android:title="test_load"
+        app:showAsAction="never"
+        />
 
 </menu>

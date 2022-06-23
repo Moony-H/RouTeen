@@ -4,14 +4,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.moony.routeen.R
 import com.moony.routeen.databinding.FragmentMemoBinding
+import com.moony.routeen.viewmodels.MainViewModel
 
 class MemoFragment:Fragment(),View.OnClickListener {
 
     private var _binding:FragmentMemoBinding?=null
     val binding:FragmentMemoBinding
         get() = _binding!!
+
+    private val viewModel:MainViewModel by viewModels(ownerProducer ={requireActivity()})
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,6 +29,7 @@ class MemoFragment:Fragment(),View.OnClickListener {
         toolbar.navigationIcon
         toolbar.setNavigationOnClickListener(this)
         toolbar.inflateMenu(R.menu.fragment_memo_toolbar_right)
+
         return binding.root
 
     }
@@ -44,6 +51,10 @@ class MemoFragment:Fragment(),View.OnClickListener {
 
             R.id.frag_memo_toolbar_alarm->{
                 Log.d("test","alarm button clicked")
+            }
+
+            R.id.frag_memo_test_load->{
+
             }
         }
     }

@@ -13,5 +13,7 @@
     <color name="memo_background">#F3F0EC</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="yellow">#FFEB3B</color>
+    <color name="rating_start_yellow">#FFD556</color>
     <color name="grey">#FFFFFFFF</color>
+    <color name="rating_background_grey">#575757</color>
 </resources>

@@ -15,7 +15,7 @@
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/rotate_button_circle.xml" value="0.196" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/drawable/sync_48px.xml" value="0.196" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/activity_main.xml" value="0.13269927536231885" />
-        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/fragment_memo.xml" value="0.13828125" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/fragment_memo.xml" value="0.21" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_basic_memo.xml" value="0.2" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_check_text_item.xml" value="0.3625" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_custom_image_control_view.xml" value="0.18802083333333333" />
@@ -25,6 +25,7 @@
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/layout/source_memo_todo_list.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/menu/fragment_memo_toolbar_left.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/menu/fragment_memo_toolbar_menu.xml" value="0.365625" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/menu/fragment_memo_toolbar_right.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/RouTeen/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.196" />
       </map>
     </option>

@@ -8,7 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.moony.routeen.data.MemoType
 import com.moony.routeen.data.entity.Memo
 import com.moony.routeen.data.entity.MemoRepository
+import com.moony.routeen.data.structure.memo.BaseMemoData
 import com.moony.routeen.data.structure.memo.TodoListMemoData
+import com.moony.routeen.data.structure.other.DateFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,29 +19,27 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MemoRepository):ViewModel() {
 
-    private val _allMemos=MutableLiveData<List<com.moony.routeen.data.structure.memo.BaseMemoData>>()
-    val allMemos:LiveData<List<com.moony.routeen.data.structure.memo.BaseMemoData>>
+    private val _allMemos=MutableLiveData<List<BaseMemoData>>()
+    val allMemos:LiveData<List<BaseMemoData>>
         get()=_allMemos
-    fun insertMemo(baseMemoData: com.moony.routeen.data.structure.memo.BaseMemoData){
+
+    private val _selectedMemoData=MutableLiveData<BaseMemoData>()
+    val selectedMemoData:LiveData<BaseMemoData>
+        get()=_selectedMemoData
+
+
+
+    fun insertMemo(baseMemoData:BaseMemoData){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertMemo(Memo(baseMemoData,MemoType.TodoListMemo))
+            repository.insertMemo(Memo(baseMemoData,baseMemoData.date))
         }
     }
 
     fun getAllMemo(){
         viewModelScope.launch(Dispatchers.IO){
             val data=repository.getAllMemo()
-            val response= mutableListOf<com.moony.routeen.data.structure.memo.BaseMemoData>()
+            val response= mutableListOf<BaseMemoData>()
 
-            data.forEach {
-                if(it.memoType==MemoType.TodoListMemo){
-                    val temp= it.baseMemoData as TodoListMemoData
-                    Log.d("test", "func call ${temp.memoType}")
-                    response.add(it.baseMemoData as TodoListMemoData)
-
-                }
-
-            }
             Log.d("all","memo $response")
             _allMemos.postValue(response)
         }
@@ -48,6 +48,14 @@ class MainViewModel @Inject constructor(private val repository: MemoRepository):
     fun deleteAllMemoData(){
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllMemo()
+        }
+    }
+
+
+
+    fun loadMemoDataByDate(dateFormat: DateFormat){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.getMemosByDate(dateFormat)
         }
     }
 

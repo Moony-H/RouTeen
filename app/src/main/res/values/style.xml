@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="RatingBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorControlNormal">@color/grey</item>
-        <item name="colorControlActivated">@color/yellow</item>
+        <item name="colorControlNormal">@color/rating_background_grey</item>
+        <item name="colorControlActivated">@color/rating_start_yellow</item>
         <item name="android:numStars">5</item>
         <item name="android:stepSize">0.5</item>
         <item name="minHeight">15dp</item>
