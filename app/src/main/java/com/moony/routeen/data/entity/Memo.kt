@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-@Entity(ignoredColumns = ["imageControlViewList"])
+@Entity
 data class Memo(
     var baseMemoData: BaseMemoData,
     var date: String

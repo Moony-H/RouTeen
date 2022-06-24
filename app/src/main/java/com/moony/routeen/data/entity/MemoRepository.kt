@@ -1,5 +1,6 @@
 package com.moony.routeen.data.entity
 
+import com.moony.routeen.data.structure.memo.BaseMemoData
 import com.moony.routeen.data.structure.other.DateFormat
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -21,5 +22,9 @@ class MemoRepository @Inject constructor(private val memoDao: MemoDao){
     }
     suspend fun deleteAllMemo(){
         memoDao.deleteAllMemoData()
+    }
+
+    suspend fun getMemo(baseMemoData: BaseMemoData):Memo{
+        return memoDao.getMemo(baseMemoData)
     }
 }

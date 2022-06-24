@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.moony.routeen.data.structure.memo.BaseMemoData
 import kotlinx.coroutines.flow.Flow
 
 
@@ -22,6 +23,9 @@ interface MemoDao {
     suspend fun deleteAllMemoData()
 
     @Query("SELECT * FROM Memo WHERE date=:date ORDER BY id")
-    suspend fun getMemosByDate(date:String): Flow<List<Memo>>
+    fun getMemosByDate(date:String): Flow<List<Memo>>
+
+    @Query("SELECT * FROM Memo WHERE baseMemoData=:baseMemoData")
+    suspend fun getMemo(baseMemoData: BaseMemoData):Memo
 
 }

@@ -59,4 +59,10 @@ class MainViewModel @Inject constructor(private val repository: MemoRepository):
         }
     }
 
+    fun getMemo(){
+        viewModelScope.launch(Dispatchers.IO){
+
+        }
+    }
+
 }
