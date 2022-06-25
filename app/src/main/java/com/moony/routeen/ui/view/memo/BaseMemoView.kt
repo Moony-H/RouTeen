@@ -13,46 +13,47 @@ import com.moony.routeen.ui.view.other.ImageControlView
 
 open class BaseMemoView: ImageControlLayout {
 
-    private val memoType=MemoType.BaseMemo
     private lateinit var binding:SourceMemoBaseBinding
     private var baseMemoData=BaseMemoData()
     constructor(context: Context):super(context){
-        init()
+        initView()
     }
     constructor(context: Context,baseMemoData: BaseMemoData):super(context){
-        this.baseMemoData= BaseMemoData()
+        this.baseMemoData= baseMemoData
         baseMemoData.imageControlViewList.forEach {
             val imageControlView=ImageControlView(context)
             imageControlView.setImageControlViewState(it)
             this.addView(imageControlView)
         }
-        init()
+        initView()
     }
     constructor(context: Context,attrs:AttributeSet):super(context, attrs){
-        init()
+        initView()
     }
     constructor(context: Context,attrs:AttributeSet,baseMemoData: BaseMemoData):super(context,attrs){
-        this.baseMemoData=BaseMemoData()
+        this.baseMemoData=baseMemoData
         baseMemoData.imageControlViewList.forEach {
             val imageControlView=ImageControlView(context)
             imageControlView.setImageControlViewState(it)
             this.addView(imageControlView)
         }
-        init()
+        initView()
     }
 
-    private fun init(){
+    private fun initView(){
         binding=SourceMemoBaseBinding.inflate(LayoutInflater.from(context),this)
-        binding
+        binding.sourceMemoBaseDateTextView.text=baseMemoData.date
+        binding.sourceMemoBaseTitleEditText.setText(baseMemoData.title)
+
         setBackgroundColor(ContextCompat.getColor(context,R.color.memo_background))
 
     }
 
-    fun getMemoData():BaseMemoData{
-        return BaseMemoData(
-            this.memoType,
-
-        )
+    open fun getMemoData():BaseMemoData{
+        this.baseMemoData.title=binding.sourceMemoBaseTitleEditText.text.toString()
+        this.baseMemoData.imageControlViewList=this.getAllImageControlViewState()
+        this.baseMemoData.date=binding.sourceMemoBaseDateTextView.text.toString()
+        return this.baseMemoData
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.moony.routeen.data.structure.memo.BaseMemoData
 import com.moony.routeen.data.structure.memo.TodoListMemoData
 
 import com.moony.routeen.databinding.SourceMemoTodoListBinding
@@ -18,7 +19,7 @@ import com.moony.routeen.ui.adapter.TodoListMemoViewAdapter
 
 class TodoListMemoView:BaseMemoView {
 
-    var todoListMemo = TodoListMemoData(1)
+    private var todoListMemoData = TodoListMemoData(1)
     private lateinit var binding: SourceMemoTodoListBinding
     private lateinit var adapter: TodoListMemoViewAdapter
     private lateinit var swipeHelperCallback: RecyclerviewSwipeHelper
@@ -27,7 +28,7 @@ class TodoListMemoView:BaseMemoView {
         init()
     }
     constructor(context: Context,data: TodoListMemoData) : super(context,data){
-        this.todoListMemo = data
+        this.todoListMemoData = data
         init()
     }
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs){
@@ -38,7 +39,7 @@ class TodoListMemoView:BaseMemoView {
         attrs,
         data
     ) {
-        this.todoListMemo = data
+        this.todoListMemoData = data
         init()
 
 
@@ -55,7 +56,7 @@ class TodoListMemoView:BaseMemoView {
         //SourceCustomTodoListMemoBinding.bind(this)
 
 
-        adapter = TodoListMemoViewAdapter(todoListMemo)
+        adapter = TodoListMemoViewAdapter(todoListMemoData)
         binding.sourceTodoListRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.sourceTodoListRecyclerView.adapter = adapter
         swipeHelperCallback =
@@ -64,7 +65,6 @@ class TodoListMemoView:BaseMemoView {
                 setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)    // 1080 / 4 = 270
             }
         ItemTouchHelper(swipeHelperCallback).attachToRecyclerView(binding.sourceTodoListRecyclerView)
-        binding.sourceTodoListTitleEditText.setText(todoListMemo.title)
         //binding.sourceTodoListRecyclerView.addItemDecoration(
         //    DividerItemDecoration(
         //        this.context,
@@ -72,6 +72,11 @@ class TodoListMemoView:BaseMemoView {
         //    )
         //)
 
+    }
+
+    override fun getMemoData(): BaseMemoData {
+        super.getMemoData()
+        return todoListMemoData
     }
 
     @SuppressLint("ClickableViewAccessibility")

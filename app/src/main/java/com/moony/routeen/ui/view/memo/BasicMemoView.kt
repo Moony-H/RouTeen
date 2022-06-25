@@ -3,6 +3,7 @@ package com.moony.routeen.ui.view.memo
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import com.moony.routeen.data.structure.memo.BaseMemoData
 import com.moony.routeen.data.structure.memo.BasicMemoData
 import com.moony.routeen.databinding.SourceMemoBasicBinding
 
@@ -15,6 +16,7 @@ class BasicMemoView: BaseMemoView {
     constructor(context: Context,data: BasicMemoData):super(context,data){
         basicMemoData=data
         initView()
+
     }
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs){
         initView()
@@ -28,14 +30,16 @@ class BasicMemoView: BaseMemoView {
 
     private fun initView() {
         binding=SourceMemoBasicBinding.inflate(LayoutInflater.from(context), this)
-
-        binding.sourceBasicMemoDateTextView.text= basicMemoData.date
-        binding.sourceMemoBasicTitleEditText.setText(basicMemoData.title)
         binding.sourceMemoBasicContent.setText(basicMemoData.content)
+    }
+
+    override fun getMemoData(): BaseMemoData {
+        super.getMemoData()
+        this.basicMemoData.content=binding.sourceMemoBasicContent.text.toString()
+        return this.basicMemoData
     }
     fun getBasicMemoViewData():BasicMemoData{
         basicMemoData.content=binding.sourceMemoBasicContent.text.toString()
-        basicMemoData.title=binding.sourceMemoBasicTitleEditText.text.toString()
         return basicMemoData
     }
 

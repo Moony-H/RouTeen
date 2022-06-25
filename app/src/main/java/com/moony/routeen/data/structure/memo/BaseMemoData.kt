@@ -8,6 +8,6 @@ import java.util.*
 open class BaseMemoData {
     var memoType=MemoType.BaseMemo
     var title=""
-    var imageControlViewList= mutableListOf<ImageControlViewState>()
-    var date: String = SimpleDateFormat("yyyy.mm.dd",Locale.KOREA).format(Date())
+    var imageControlViewList= listOf<ImageControlViewState>()
+    var date: String = SimpleDateFormat("yyyy.MM.dd",Locale.KOREA).format(Date())
 }

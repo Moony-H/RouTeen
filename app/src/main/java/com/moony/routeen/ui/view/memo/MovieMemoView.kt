@@ -3,6 +3,7 @@ package com.moony.routeen.ui.view.memo
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import com.moony.routeen.data.structure.memo.BaseMemoData
 import com.moony.routeen.data.structure.memo.MovieMemoData
 import com.moony.routeen.databinding.SourceMemoMovieBinding
 
@@ -29,11 +30,18 @@ class MovieMemoView:BaseMemoView {
 
         binding.sourceMemoMovieContent.setText(movieMemoData.content)
         binding.sourceMemoMovieDescriptionContent.setText(movieMemoData.description)
-        binding.sourceMemoMovieDate.text=movieMemoData.date
-        binding.sourceMemoMovieTitle.setText(movieMemoData.title)
         binding.sourceMemoMovieDirectorName.setText(movieMemoData.director)
         binding.sourceMemoMovieRating.rating=movieMemoData.rating
 
+    }
+
+    override fun getMemoData(): BaseMemoData {
+        super.getMemoData()
+        this.movieMemoData.director=binding.sourceMemoMovieDirectorName.text.toString()
+        this.movieMemoData.content=binding.sourceMemoMovieContent.text.toString()
+        this.movieMemoData.description=binding.sourceMemoMovieDescriptionContent.text.toString()
+        this.movieMemoData.rating=binding.sourceMemoMovieRating.rating
+        return this.movieMemoData
     }
 
 

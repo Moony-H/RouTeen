@@ -24,7 +24,7 @@
         android:autofillHints=""
         android:inputType="" />
     <TextView
-        android:id="@+id/source_base_memo_date_text_view"
+        android:id="@+id/source_memo_base_date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/source_memo_base_title_edit_text"
