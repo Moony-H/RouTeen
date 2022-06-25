@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.moony.routeen.R
 import com.moony.routeen.databinding.FragmentMemoBinding
+import com.moony.routeen.ui.view.memo.BaseMemoView
+import com.moony.routeen.ui.view.memo.MovieMemoView
 import com.moony.routeen.viewmodels.MainViewModel
 
 class MemoFragment:Fragment(),View.OnClickListener {
@@ -14,7 +16,7 @@ class MemoFragment:Fragment(),View.OnClickListener {
     private var _binding:FragmentMemoBinding?=null
     val binding:FragmentMemoBinding
         get() = _binding!!
-
+    private var memoView:BaseMemoView?=null
     private val viewModel:MainViewModel by viewModels(ownerProducer ={requireActivity()})
 
 
@@ -28,7 +30,12 @@ class MemoFragment:Fragment(),View.OnClickListener {
         toolbar.setNavigationIcon(R.drawable.arrow_back_48px)
         toolbar.navigationIcon
         toolbar.setNavigationOnClickListener(this)
-        toolbar.inflateMenu(R.menu.fragment_memo_toolbar_right)
+        toolbar.inflateMenu(R.menu.menu_fragment_memo_toolbar_right)
+
+        context?.let {
+            memoView=MovieMemoView(it)
+            binding.fragmentMemoMemoFrame.addView(memoView)
+        }
 
         return binding.root
 
@@ -54,7 +61,12 @@ class MemoFragment:Fragment(),View.OnClickListener {
             }
 
             R.id.frag_memo_test_load->{
+                Log.d("test","load button clicked")
 
+            }
+            R.id.frag_memo_test_save->{
+                Log.d("test","save button clicked")
+                viewModel.insertMemo()
             }
         }
     }

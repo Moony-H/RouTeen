@@ -16,5 +16,10 @@
         android:title="test_load"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/frag_memo_test_save"
+        android:title="test_save"
+        app:showAsAction="never"
+        />
 
 </menu>

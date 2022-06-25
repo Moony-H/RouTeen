@@ -5,7 +5,7 @@ import com.moony.routeen.data.structure.other.ImageControlViewState
 import java.text.SimpleDateFormat
 import java.util.*
 
-abstract class BaseMemoData {
+open class BaseMemoData {
     var memoType=MemoType.BaseMemo
     var title=""
     var imageControlViewList= mutableListOf<ImageControlViewState>()
