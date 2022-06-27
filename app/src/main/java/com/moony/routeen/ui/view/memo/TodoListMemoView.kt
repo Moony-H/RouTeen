@@ -53,7 +53,6 @@ class TodoListMemoView:BaseMemoView {
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
                 this
             )
-        //SourceCustomTodoListMemoBinding.bind(this)
 
 
         adapter = TodoListMemoViewAdapter(todoListMemoData)
@@ -65,18 +64,26 @@ class TodoListMemoView:BaseMemoView {
                 setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)    // 1080 / 4 = 270
             }
         ItemTouchHelper(swipeHelperCallback).attachToRecyclerView(binding.sourceTodoListRecyclerView)
-        //binding.sourceTodoListRecyclerView.addItemDecoration(
-        //    DividerItemDecoration(
-        //        this.context,
-        //        RecyclerView.VERTICAL
-        //    )
-        //)
+        binding.sourceTodoListRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this.context,
+                RecyclerView.VERTICAL
+            )
+        )
 
     }
 
     override fun getMemoData(): BaseMemoData {
         super.getMemoData()
         return todoListMemoData
+    }
+
+    override fun setMemoData(data: BaseMemoData) {
+        super.setMemoData(data)
+        if(data is TodoListMemoData){
+            this.todoListMemoData=data
+            binding.sourceTodoListRecyclerView.adapter?.notifyDataSetChanged()
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -28,10 +28,7 @@ class MovieMemoView:BaseMemoView {
     private fun init(){
         binding=SourceMemoMovieBinding.inflate(LayoutInflater.from(context),this)
 
-        binding.sourceMemoMovieContent.setText(movieMemoData.content)
-        binding.sourceMemoMovieDescriptionContent.setText(movieMemoData.description)
-        binding.sourceMemoMovieDirectorName.setText(movieMemoData.director)
-        binding.sourceMemoMovieRating.rating=movieMemoData.rating
+        setData()
 
     }
 
@@ -42,6 +39,22 @@ class MovieMemoView:BaseMemoView {
         this.movieMemoData.description=binding.sourceMemoMovieDescriptionContent.text.toString()
         this.movieMemoData.rating=binding.sourceMemoMovieRating.rating
         return this.movieMemoData
+    }
+
+    override fun setMemoData(data: BaseMemoData) {
+        super.setMemoData(data)
+        if(data is MovieMemoData){
+            this.movieMemoData=data
+            setData()
+        }
+
+    }
+
+    private fun setData(){
+        binding.sourceMemoMovieContent.setText(movieMemoData.content)
+        binding.sourceMemoMovieDescriptionContent.setText(movieMemoData.description)
+        binding.sourceMemoMovieDirectorName.setText(movieMemoData.director)
+        binding.sourceMemoMovieRating.rating=movieMemoData.rating
     }
 
 

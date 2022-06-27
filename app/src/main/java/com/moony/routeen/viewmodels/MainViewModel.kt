@@ -39,7 +39,9 @@ class MainViewModel @Inject constructor(private val repository: MemoRepository):
         viewModelScope.launch(Dispatchers.IO){
             val data=repository.getAllMemo()
             val response= mutableListOf<BaseMemoData>()
-
+            data.forEach {
+                response.add(it.baseMemoData)
+            }
             Log.d("all","memo $response")
             _allMemos.postValue(response)
         }

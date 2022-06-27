@@ -42,11 +42,13 @@ open class BaseMemoView: ImageControlLayout {
 
     private fun initView(){
         binding=SourceMemoBaseBinding.inflate(LayoutInflater.from(context),this)
-        binding.sourceMemoBaseDateTextView.text=baseMemoData.date
-        binding.sourceMemoBaseTitleEditText.setText(baseMemoData.title)
-
+        setData()
         setBackgroundColor(ContextCompat.getColor(context,R.color.memo_background))
 
+    }
+    private fun setData(){
+        binding.sourceMemoBaseDateTextView.text=baseMemoData.date
+        binding.sourceMemoBaseTitleEditText.setText(baseMemoData.title)
     }
 
     open fun getMemoData():BaseMemoData{
@@ -54,6 +56,11 @@ open class BaseMemoView: ImageControlLayout {
         this.baseMemoData.imageControlViewList=this.getAllImageControlViewState()
         this.baseMemoData.date=binding.sourceMemoBaseDateTextView.text.toString()
         return this.baseMemoData
+    }
+
+    open fun setMemoData(data:BaseMemoData){
+        this.baseMemoData=data
+        setData()
     }
 
 }

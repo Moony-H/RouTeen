@@ -38,6 +38,15 @@ class BasicMemoView: BaseMemoView {
         this.basicMemoData.content=binding.sourceMemoBasicContent.text.toString()
         return this.basicMemoData
     }
+
+    override fun setMemoData(data: BaseMemoData) {
+        super.setMemoData(data)
+        if(data is BasicMemoData){
+            this.basicMemoData=data
+            binding.sourceMemoBasicContent.setText(data.content)
+        }
+    }
+
     fun getBasicMemoViewData():BasicMemoData{
         basicMemoData.content=binding.sourceMemoBasicContent.text.toString()
         return basicMemoData
