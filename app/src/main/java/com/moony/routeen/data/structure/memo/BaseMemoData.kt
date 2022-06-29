@@ -5,9 +5,8 @@ import com.moony.routeen.data.structure.other.ImageControlViewState
 import java.text.SimpleDateFormat
 import java.util.*
 
-open class BaseMemoData {
+open class BaseMemoData(var title: String="", var date: String = SimpleDateFormat("yyyy.MM.dd",Locale.KOREA).format(Date())) {
     var memoType=MemoType.BaseMemo
-    var title=""
     var imageControlViewList= listOf<ImageControlViewState>()
-    var date: String = SimpleDateFormat("yyyy.MM.dd",Locale.KOREA).format(Date())
+
 }

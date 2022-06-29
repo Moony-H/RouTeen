@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.moony.routeen.R
 import com.moony.routeen.data.structure.memo.BaseMemoData
+import com.moony.routeen.data.structure.memo.BasicMemoData
 import com.moony.routeen.data.structure.memo.TodoListMemoData
 import com.moony.routeen.databinding.FragmentMemoBinding
 import com.moony.routeen.ui.view.memo.BaseMemoView
@@ -15,6 +16,10 @@ import com.moony.routeen.ui.view.memo.BasicMemoView
 
 import com.moony.routeen.ui.view.memo.TodoListMemoView
 import com.moony.routeen.viewmodels.MainViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class MemoFragment:Fragment(),View.OnClickListener,Toolbar.OnMenuItemClickListener {
 
@@ -66,6 +71,7 @@ class MemoFragment:Fragment(),View.OnClickListener,Toolbar.OnMenuItemClickListen
 
             R.id.frag_memo_toolbar_delete->{
                 Log.d("test","delete button clicked")
+                viewModel.deleteAllMemoData()
             }
 
             R.id.frag_memo_toolbar_alarm->{
@@ -74,14 +80,19 @@ class MemoFragment:Fragment(),View.OnClickListener,Toolbar.OnMenuItemClickListen
 
             R.id.frag_memo_test_load->{
                 Log.d("test","load button clicked")
-                viewModel.getAllMemo()
-                viewModel.allMemos.value?.let{
-                    memoView.setMemoData(it[0])
+                viewModel.getAllMemo(){
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Log.d("test","it is title?? :: ${it[0].title}")
+                        memoView.setMemo((it[0] as BasicMemoData))
+                    }
+
                 }
+
             }
             R.id.frag_memo_test_save->{
                 Log.d("test","save button clicked")
-                viewModel.insertMemo(memoView.getMemoData())
+                Log.d("test","save the title ${memoView.getMemo().title}")
+                viewModel.insertMemo(memoView.getMemo())
             }
         }
         return true

@@ -73,13 +73,13 @@ class TodoListMemoView:BaseMemoView {
 
     }
 
-    override fun getMemoData(): BaseMemoData {
-        super.getMemoData()
+    override fun getMemo(): BaseMemoData {
+        super.getMemo()
         return todoListMemoData
     }
 
-    override fun setMemoData(data: BaseMemoData) {
-        super.setMemoData(data)
+    override fun setMemo(data: BaseMemoData) {
+        super.setMemo(data)
         if(data is TodoListMemoData){
             this.todoListMemoData=data
             binding.sourceTodoListRecyclerView.adapter?.notifyDataSetChanged()

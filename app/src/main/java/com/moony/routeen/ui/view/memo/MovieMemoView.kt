@@ -32,8 +32,8 @@ class MovieMemoView:BaseMemoView {
 
     }
 
-    override fun getMemoData(): BaseMemoData {
-        super.getMemoData()
+    override fun getMemo(): BaseMemoData {
+        super.getMemo()
         this.movieMemoData.director=binding.sourceMemoMovieDirectorName.text.toString()
         this.movieMemoData.content=binding.sourceMemoMovieContent.text.toString()
         this.movieMemoData.description=binding.sourceMemoMovieDescriptionContent.text.toString()
@@ -41,8 +41,8 @@ class MovieMemoView:BaseMemoView {
         return this.movieMemoData
     }
 
-    override fun setMemoData(data: BaseMemoData) {
-        super.setMemoData(data)
+    override fun setMemo(data: BaseMemoData) {
+        super.setMemo(data)
         if(data is MovieMemoData){
             this.movieMemoData=data
             setData()
