@@ -9,9 +9,8 @@ import com.moony.routeen.data.structure.memo.BasicMemoData
 import com.moony.routeen.databinding.SourceMemoBasicBinding
 
 class BasicMemoView: BaseMemoView {
-    override var memoData: BaseMemoData =BasicMemoData()
-    private val basicMemoData:BasicMemoData
-        get() = memoData as BasicMemoData
+
+
     private lateinit var binding:SourceMemoBasicBinding
     constructor(context: Context) : super(context){
         initView()

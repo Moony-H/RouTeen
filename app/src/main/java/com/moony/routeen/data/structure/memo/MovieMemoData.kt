@@ -1,8 +1,11 @@
 package com.moony.routeen.data.structure.memo
 
 import com.moony.routeen.data.MemoType
+import com.moony.routeen.data.structure.other.ImageControlViewState
 
-class MovieMemoData:BaseMemoData() {
+class MovieMemoData(title: String, date: String,
+                    imageControlViewStateList: List<ImageControlViewState>
+) :BaseMemoData(title, date, imageControlViewStateList) {
     var director=""
     var description=""
     var rating=0f
