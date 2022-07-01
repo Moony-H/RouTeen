@@ -12,13 +12,12 @@ import com.moony.routeen.ui.view.other.ImageControlView
 
 open class BaseMemoView: ImageControlLayout {
 
-    private lateinit var binding:SourceMemoBaseBinding
+    private lateinit var baseBinding:SourceMemoBaseBinding
     constructor(context: Context):super(context){
         initView()
     }
 
     constructor(context: Context,baseMemoData: BaseMemoData):super(context){
-        setMemoData(baseMemoData)
         baseMemoData.imageControlViewStateList.forEach {
             val imageControlView=ImageControlView(context)
             imageControlView.setImageControlViewState(it)
@@ -30,7 +29,6 @@ open class BaseMemoView: ImageControlLayout {
         initView()
     }
     constructor(context: Context,attrs:AttributeSet,baseMemoData: BaseMemoData):super(context,attrs){
-        setMemoData(baseMemoData)
         baseMemoData.imageControlViewStateList.forEach {
             val imageControlView=ImageControlView(context)
             imageControlView.setImageControlViewState(it)
@@ -40,8 +38,7 @@ open class BaseMemoView: ImageControlLayout {
     }
 
     private fun initView(){
-        binding=SourceMemoBaseBinding.inflate(LayoutInflater.from(context),this)
-
+        baseBinding=SourceMemoBaseBinding.inflate(LayoutInflater.from(context),this)
         setBackgroundColor(ContextCompat.getColor(context,R.color.memo_background))
 
     }
@@ -50,16 +47,16 @@ open class BaseMemoView: ImageControlLayout {
     open fun getMemoData(): BaseMemoData {
 
         return BaseMemoData(
-            binding.sourceMemoBaseTitleEditText.text.toString(),
-            binding.sourceMemoBaseDateTextView.text.toString(),
+            baseBinding.sourceMemoBaseTitleEditText.text.toString(),
+            baseBinding.sourceMemoBaseDateTextView.text.toString(),
             getAllImageControlViewState()
 
         )
     }
 
     open fun setMemoData(data:BaseMemoData){
-        binding.sourceMemoBaseDateTextView.text=data.date
-        binding.sourceMemoBaseTitleEditText.setText(data.title)
+        baseBinding.sourceMemoBaseDateTextView.text=data.date
+        baseBinding.sourceMemoBaseTitleEditText.setText(data.title)
     }
 
 }
