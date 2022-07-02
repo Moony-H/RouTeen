@@ -16,15 +16,19 @@ import com.moony.routeen.databinding.SourceMemoTodoListBinding
 
 import com.moony.routeen.ui.adapter.RecyclerviewSwipeHelper
 import com.moony.routeen.ui.adapter.TodoListMemoViewAdapter
+import com.moony.routeen.utils.DateManager
 
 class TodoListMemoView:BaseMemoView {
 
-    private var todoListMemoData = TodoListMemoData(1)
+    private lateinit var todoListMemoData:TodoListMemoData
     private lateinit var binding: SourceMemoTodoListBinding
     private lateinit var adapter: TodoListMemoViewAdapter
     private lateinit var swipeHelperCallback: RecyclerviewSwipeHelper
 
     constructor(context: Context) : super(context){
+        this.todoListMemoData= TodoListMemoData(
+            BaseMemoData("",DateManager.getTodayDate(), mutableListOf())
+        )
         init()
     }
     constructor(context: Context,data: TodoListMemoData) : super(context,data){
@@ -73,13 +77,13 @@ class TodoListMemoView:BaseMemoView {
 
     }
 
-    override fun getMemo(): BaseMemoData {
-        super.getMemo()
+    override fun getMemoData(): BaseMemoData {
+        super.getMemoData()
         return todoListMemoData
     }
 
-    override fun setMemo(data: BaseMemoData) {
-        super.setMemo(data)
+    override fun setMemoData(data: BaseMemoData) {
+        super.setMemoData(data)
         if(data is TodoListMemoData){
             this.todoListMemoData=data
             binding.sourceTodoListRecyclerView.adapter?.notifyDataSetChanged()

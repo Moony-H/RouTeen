@@ -35,17 +35,16 @@ class BasicMemoView: BaseMemoView {
     }
 
     override fun getMemoData(): BaseMemoData {
-        super.getMemoData()
-        binding.sourceMemoBasicContent.text.toString()
-        return this.memoData
+        val baseMemoData=BasicMemoData(super.getMemoData())
+        baseMemoData.content=binding.sourceMemoBasicContent.text.toString()
+        return baseMemoData
     }
 
     override fun setMemoData(data: BaseMemoData) {
         super.setMemoData(data)
-        if(data is BasicMemoData){
-            this.memoData=data
+        if(data is BasicMemoData)
             binding.sourceMemoBasicContent.setText(data.content)
-        }
+
     }
 
 

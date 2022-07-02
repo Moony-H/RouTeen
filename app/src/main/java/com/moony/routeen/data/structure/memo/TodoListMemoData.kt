@@ -7,6 +7,11 @@ import com.moony.routeen.data.structure.other.ImageControlViewState
 class TodoListMemoData(title: String, date: String,
                        imageControlViewStateList: List<ImageControlViewState>
 ): BaseMemoData(title, date, imageControlViewStateList) {
+    constructor(baseMemoData: BaseMemoData) : this(
+        baseMemoData.title,
+        baseMemoData.date,
+        baseMemoData.imageControlViewStateList
+    )
 
 
     private val _todoList = mutableListOf<CheckTextState>()
