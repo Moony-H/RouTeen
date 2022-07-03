@@ -10,7 +10,7 @@ open class BaseMemoData(
     var date: String,
     var imageControlViewStateList:List<ImageControlViewState>
 ) {
-    var memoType=MemoType.BaseMemo
+    var memoType = MemoType.BaseMemo
 
 
 }

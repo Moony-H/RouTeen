@@ -20,24 +20,36 @@ import com.moony.routeen.utils.DateManager
 
 class TodoListMemoView:BaseMemoView {
 
-    private lateinit var todoListMemoData:TodoListMemoData
+    private lateinit var todoListMemoData: TodoListMemoData
     private lateinit var binding: SourceMemoTodoListBinding
     private lateinit var adapter: TodoListMemoViewAdapter
     private lateinit var swipeHelperCallback: RecyclerviewSwipeHelper
 
-    constructor(context: Context) : super(context){
-        this.todoListMemoData= TodoListMemoData(
-            BaseMemoData("",DateManager.getTodayDate(), mutableListOf())
+    constructor(context: Context) : super(context) {
+        this.todoListMemoData = TodoListMemoData(
+            "",
+            DateManager.getTodayDate(),
+            listOf(),
+            0
         )
         init()
     }
-    constructor(context: Context,data: TodoListMemoData) : super(context,data){
+
+    constructor(context: Context, data: TodoListMemoData) : super(context, data) {
         this.todoListMemoData = data
         init()
     }
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs){
+
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        this.todoListMemoData = TodoListMemoData(
+            "",
+            DateManager.getTodayDate(),
+            listOf(),
+            0
+        )
         init()
     }
+
     constructor(context: Context, attrs: AttributeSet, data: TodoListMemoData) : super(
         context,
         attrs,
@@ -84,8 +96,8 @@ class TodoListMemoView:BaseMemoView {
 
     override fun setMemoData(data: BaseMemoData) {
         super.setMemoData(data)
-        if(data is TodoListMemoData){
-            this.todoListMemoData=data
+        if (data is TodoListMemoData) {
+            this.todoListMemoData = data
             binding.sourceTodoListRecyclerView.adapter?.notifyDataSetChanged()
         }
     }

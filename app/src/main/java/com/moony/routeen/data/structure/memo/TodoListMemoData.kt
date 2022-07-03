@@ -4,14 +4,12 @@ import com.moony.routeen.data.MemoType
 import com.moony.routeen.data.structure.other.CheckTextState
 import com.moony.routeen.data.structure.other.ImageControlViewState
 
-class TodoListMemoData(title: String, date: String,
-                       imageControlViewStateList: List<ImageControlViewState>
+class TodoListMemoData(
+    title: String,
+    date: String,
+    imageControlViewStateList: List<ImageControlViewState>,
+    var checkTextViewState:List<CheckTextState>
 ): BaseMemoData(title, date, imageControlViewStateList) {
-    constructor(baseMemoData: BaseMemoData) : this(
-        baseMemoData.title,
-        baseMemoData.date,
-        baseMemoData.imageControlViewStateList
-    )
 
 
     private val _todoList = mutableListOf<CheckTextState>()
@@ -19,19 +17,35 @@ class TodoListMemoData(title: String, date: String,
         get() = _todoList
 
     constructor(
-        defaultSize: Int,
         title: String,
         date: String,
-        imageControlViewStateList: List<ImageControlViewState>
-    ) : this(title, date, imageControlViewStateList) {
+        imageControlViewStateList: List<ImageControlViewState>,
+        defaultSize: Int
+    ) : this(
+        title, date, imageControlViewStateList, listOf()
+    ) {
         for (i in 0 until defaultSize) {
             _todoList.add(CheckTextState(false, ""))
         }
     }
 
+    constructor(baseMemoData: BaseMemoData, defaultSize: Int) : this(
+        baseMemoData.title,
+        baseMemoData.date,
+        baseMemoData.imageControlViewStateList,
+        listOf()
+    ) {
+        for (i in 0 until defaultSize) {
+            _todoList.add(CheckTextState(false, ""))
+        }
+    }
+
+
     init {
         super.memoType = MemoType.TodoListMemo
-
+        checkTextViewState.forEach {
+            _todoList.add(it)
+        }
     }
 
     fun addTodoList(pair: CheckTextState) {

@@ -12,34 +12,40 @@ import com.moony.routeen.ui.view.other.ImageControlView
 
 open class BaseMemoView: ImageControlLayout {
 
-    private lateinit var baseBinding:SourceMemoBaseBinding
-    constructor(context: Context):super(context){
+    private lateinit var baseBinding: SourceMemoBaseBinding
+
+    constructor(context: Context) : super(context) {
         initView()
     }
 
-    constructor(context: Context,baseMemoData: BaseMemoData):super(context){
+    constructor(context: Context, baseMemoData: BaseMemoData) : super(context) {
         baseMemoData.imageControlViewStateList.forEach {
-            val imageControlView=ImageControlView(context)
-            imageControlView.setImageControlViewState(it)
-            this.addView(imageControlView)
-        }
-        initView()
-    }
-    constructor(context: Context,attrs:AttributeSet):super(context, attrs){
-        initView()
-    }
-    constructor(context: Context,attrs:AttributeSet,baseMemoData: BaseMemoData):super(context,attrs){
-        baseMemoData.imageControlViewStateList.forEach {
-            val imageControlView=ImageControlView(context)
+            val imageControlView = ImageControlView(context)
             imageControlView.setImageControlViewState(it)
             this.addView(imageControlView)
         }
         initView()
     }
 
-    private fun initView(){
-        baseBinding=SourceMemoBaseBinding.inflate(LayoutInflater.from(context),this)
-        setBackgroundColor(ContextCompat.getColor(context,R.color.memo_background))
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        initView()
+    }
+
+    constructor(context: Context, attrs: AttributeSet, baseMemoData: BaseMemoData) : super(
+        context,
+        attrs
+    ) {
+        baseMemoData.imageControlViewStateList.forEach {
+            val imageControlView = ImageControlView(context)
+            imageControlView.setImageControlViewState(it)
+            this.addView(imageControlView)
+        }
+        initView()
+    }
+
+    private fun initView() {
+        baseBinding = SourceMemoBaseBinding.inflate(LayoutInflater.from(context), this)
+        setBackgroundColor(ContextCompat.getColor(context, R.color.memo_background))
 
     }
 
@@ -54,8 +60,8 @@ open class BaseMemoView: ImageControlLayout {
         )
     }
 
-    open fun setMemoData(data:BaseMemoData){
-        baseBinding.sourceMemoBaseDateTextView.text=data.date
+    open fun setMemoData(data: BaseMemoData) {
+        baseBinding.sourceMemoBaseDateTextView.text = data.date
         baseBinding.sourceMemoBaseTitleEditText.setText(data.title)
     }
 

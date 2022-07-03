@@ -8,47 +8,57 @@ import com.moony.routeen.data.structure.memo.MovieMemoData
 import com.moony.routeen.databinding.SourceMemoMovieBinding
 
 class MovieMemoView:BaseMemoView {
-    private lateinit var binding:SourceMemoMovieBinding
-    constructor(context: Context):super(context){
+    private lateinit var binding: SourceMemoMovieBinding
+
+    constructor(context: Context) : super(context) {
         init()
     }
-    constructor(context: Context,data: MovieMemoData):super(context){
-        init()
-        setMemoData(data)
-    }
-    constructor(context: Context, attrs:AttributeSet):super(context, attrs){
-        init()
-    }
-    constructor(context: Context, attrs:AttributeSet,data: MovieMemoData):super(context, attrs,data){
+
+    constructor(context: Context, data: MovieMemoData) : super(context) {
         init()
         setMemoData(data)
     }
 
-    private fun init(){
-        binding=SourceMemoMovieBinding.inflate(LayoutInflater.from(context),this)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet, data: MovieMemoData) : super(
+        context,
+        attrs,
+        data
+    ) {
+        init()
+        setMemoData(data)
+    }
+
+    private fun init() {
+        binding = SourceMemoMovieBinding.inflate(LayoutInflater.from(context), this)
 
     }
 
     override fun getMemoData(): BaseMemoData {
-        val movieMemoData=MovieMemoData(super.getMemoData())
-        movieMemoData.director=binding.sourceMemoMovieDirectorName.text.toString()
-        movieMemoData.content=binding.sourceMemoMovieContent.text.toString()
-        movieMemoData.description=binding.sourceMemoMovieDescriptionContent.text.toString()
-        movieMemoData.rating=binding.sourceMemoMovieRating.rating
-        return movieMemoData
+
+
+        return MovieMemoData(
+            super.getMemoData(),
+            binding.sourceMemoMovieDirectorName.text.toString(),
+            binding.sourceMemoMovieDescriptionContent.text.toString(),
+            binding.sourceMemoMovieRating.rating,
+            binding.sourceMemoMovieContent.text.toString()
+        )
     }
 
     override fun setMemoData(data: BaseMemoData) {
         super.setMemoData(data)
-        if(data is MovieMemoData){
+        if (data is MovieMemoData) {
             binding.sourceMemoMovieContent.setText(data.content)
             binding.sourceMemoMovieDescriptionContent.setText(data.description)
             binding.sourceMemoMovieDirectorName.setText(data.director)
-            binding.sourceMemoMovieRating.rating=data.rating
+            binding.sourceMemoMovieRating.rating = data.rating
         }
 
     }
-
 
 
 }
